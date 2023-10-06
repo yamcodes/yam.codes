@@ -6,10 +6,7 @@
 	"workspaceMount": "src=${localWorkspaceFolder},dst=/workspace,type=bind,consistency=cached",
 	"workspaceFolder": "/workspace",
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [
-		3000,
-		5000
-	],
+	// "forwardPorts": [3000, 5000],
 	"features": {
 		"common": {
 			"username": "automatic",
@@ -65,14 +62,14 @@
 		}
 	},
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "zsh .devcontainer/post-create.zsh",
-	"postAttachCommand": "zsh .devcontainer/post-start.zsh",
-	"portsAttributes": {
-		"5173": {
-			"label": "App",
-			"onAutoForward": "openPreview"
-		}
-	}
+	"postCreateCommand": "zsh .devcontainer/post-create.zsh"
+	// "postAttachCommand": "zsh .devcontainer/post-start.zsh",
+	// "portsAttributes": {
+	// 	"5173": {
+	// 		"label": "App",
+	// 		"onAutoForward": "openPreview"
+	// 	}
+	// }
 	// "overrideCommand": false,
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
