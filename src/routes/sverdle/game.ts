@@ -1,11 +1,15 @@
 import { words, allowed } from './words.server';
 
 export class Game {
+	index: number;
+	guesses: string[];
+	answers: string[];
+	answer: string;
 	/**
-	 * Create a game object from the player's cookie, or initialise a new game
-	 * @param {string | undefined} serialized
+	 * Create a game object from the player's cookie, or initialize a new game
+	 * @param serialized - the player's cookie
 	 */
-	constructor(serialized = undefined) {
+	constructor(serialized?: string) {
 		if (serialized) {
 			const [index, guesses, answers] = serialized.split('-');
 
@@ -24,9 +28,9 @@ export class Game {
 	/**
 	 * Update game state based on a guess of a five-letter word. Returns
 	 * true if the guess was valid, false otherwise
-	 * @param {string[]} letters
+	 * @param letters
 	 */
-	enter(letters) {
+	enter(letters: string[]) {
 		const word = letters.join('');
 		const valid = allowed.has(word);
 

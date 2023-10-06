@@ -1,17 +1,22 @@
 import { onCLS, onFCP, onFID, onLCP, onTTFB } from 'web-vitals';
+import type { Metric } from 'web-vitals';
+
+type SendToAnalyticsOptions = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	params: { [s: string]: any } | ArrayLike<any>;
+	path: string;
+	analyticsId: string;
+	debug: boolean;
+};
 
 const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals';
 
 function getConnectionSpeed() {
-	// @ts-ignore
+	// @ts-ignore - `navigator` does not have `connection` in its type definition
 	return navigator?.connection?.effectiveType ?? '';
 }
 
-/**
- * @param {import("web-vitals").Metric} metric
- * @param {{ params: { [s: string]: any; } | ArrayLike<any>; path: string; analyticsId: string; debug: boolean; }} options
- */
-function sendToAnalytics(metric, options) {
+function sendToAnalytics(metric: Metric, options: SendToAnalyticsOptions) {
 	const page = Object.entries(options.params).reduce(
 		(acc, [key, value]) => acc.replace(value, `[${key}]`),
 		options.path
@@ -46,10 +51,8 @@ function sendToAnalytics(metric, options) {
 		});
 }
 
-/**
- * @param {any} options
- */
-export function webVitals(options) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function webVitals(options: any) {
 	try {
 		console.log(`[Web Vitals] for page ${options.path}`);
 		onFID((metric) => sendToAnalytics(metric, options));
