@@ -53,8 +53,6 @@
 				"ms-vscode.wordcount",
 				"editorconfig.editorconfig",
 				"streetsidesoftware.code-spell-checker",
-				"redhat.fabric8-analytics",
-				"redhat.vscode-yaml",
 				"bierner.github-markdown-preview",
 				"ms-playwright.playwright",
 				"github.vscode-github-actions"
@@ -62,14 +60,14 @@
 		}
 	},
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "zsh .devcontainer/post-create.zsh"
-	// "postAttachCommand": "zsh .devcontainer/post-start.zsh",
-	// "portsAttributes": {
-	// 	"5173": {
-	// 		"label": "App",
-	// 		"onAutoForward": "openPreview"
-	// 	}
-	// }
+	"postCreateCommand": "zsh .devcontainer/post-create.zsh",
+	"postAttachCommand": "zsh .devcontainer/post-start.zsh",
+	"portsAttributes": {
+		"5173": {
+			"label": "App",
+			"onAutoForward": "openPreview"
+		}
+	}
 	// "overrideCommand": false,
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
