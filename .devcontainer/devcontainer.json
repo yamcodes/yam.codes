@@ -1,78 +1,81 @@
 {
-	"name": "Bun (Bullseye)",
-	"build": {
-		"dockerfile": "Dockerfile"
-	},
-	"workspaceMount": "src=${localWorkspaceFolder},dst=/workspace,type=bind,consistency=cached",
-	"workspaceFolder": "/workspace",
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [3000, 5000],
-	"features": {
-		"common": {
-			"username": "automatic",
-			"uid": "automatic",
-			"gid": "automatic",
-			"installZsh": true,
-			"upgradePackages": true
-		},
-		"docker-from-docker": {
-			"version": "latest",
-			"moby": false,
-			"dockerDashComposeVersion": "v2"
-		},
-		"github-cli": "latest",
-		"ghcr.io/shyim/devcontainers-features/bun:0": {}
-	},
-	"customizations": {
-		"vscode": {
-			"settings": {
-				"terminal.integrated.defaultProfile.linux": "zsh",
-				"editor.formatOnPaste": true,
-				"editor.guides.bracketPairs": "active",
-				"scm.defaultViewMode": "tree",
-				"debug.internalConsoleOptions": "neverOpen",
-				"eslint.validate": [
-					"javascript",
-					"typescript"
-				],
-				"eslint.workingDirectories": [
-					{
-						"directory": "./test-project",
-						"changeProcessCWD": true
-					}
-				]
-			},
-			// Add the IDs of extensions you want installed when the container is created.
-			"extensions": [
-				"humao.rest-client",
-				"github.vscode-pull-request-github",
-				"visualstudioexptteam.vscodeintellicode",
-				"visualstudiotxptteam.vscodeintellicode-completions",
-				"ms-azuretools.vscode-docker",
-				"dbaeumer.vscode-eslint",
-				"ms-vscode.wordcount",
-				"editorconfig.editorconfig",
-				"streetsidesoftware.code-spell-checker",
-				"bierner.github-markdown-preview",
-				"ms-playwright.playwright",
-				"github.vscode-github-actions",
-				"svelte.svelte-vscode"
-			]
-		}
-	},
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "zsh .devcontainer/post-create.zsh",
-	"postAttachCommand": "zsh .devcontainer/post-start.zsh",
-	"portsAttributes": {
-		"5173": {
-			"label": "App",
-			"onAutoForward": "openPreview"
-		}
-	},
-	"forwardPorts": [
-		5173
-	],
-	// "overrideCommand": false,
-	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
+  "name": "Bun (Bullseye)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceMount": "src=${localWorkspaceFolder},dst=/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/workspace",
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [3000, 5000],
+  "features": {
+    "common": {
+      "username": "automatic",
+      "uid": "automatic",
+      "gid": "automatic",
+      "installZsh": true,
+      "upgradePackages": true
+    },
+    "docker-from-docker": {
+      "version": "latest",
+      "moby": false,
+      "dockerDashComposeVersion": "v2"
+    },
+    "github-cli": "latest",
+    "ghcr.io/shyim/devcontainers-features/bun:0": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "editor.formatOnPaste": true,
+        "editor.guides.bracketPairs": "active",
+        "scm.defaultViewMode": "tree",
+        "debug.internalConsoleOptions": "neverOpen",
+        "eslint.validate": ["javascript", "typescript"],
+        "eslint.workingDirectories": [
+          {
+            "directory": "./test-project",
+            "changeProcessCWD": true
+          }
+        ],
+        // set prettier as default formatter
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      },
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "humao.rest-client",
+        "github.vscode-pull-request-github",
+        "visualstudioexptteam.vscodeintellicode",
+        "visualstudiotxptteam.vscodeintellicode-completions",
+        "ms-azuretools.vscode-docker",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.wordcount",
+        "editorconfig.editorconfig",
+        "streetsidesoftware.code-spell-checker",
+        "bierner.github-markdown-preview",
+        "ms-playwright.playwright",
+        "github.vscode-github-actions",
+        "svelte.svelte-vscode",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "zsh .devcontainer/post-create.zsh",
+  "postAttachCommand": "zsh .devcontainer/post-start.zsh",
+  "portsAttributes": {
+    "5173": {
+      "label": "App",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [5173]
+  // "overrideCommand": false,
+  // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  // "remoteUser": "vscode"
 }

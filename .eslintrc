@@ -1,19 +1,32 @@
-root: true
-extends:
-  - eslint:recommended
-  - plugin:svelte/recommended
-  - prettier
-  - plugin:@typescript-eslint/recommended
-parserOptions:
-  sourceType: module
-  ecmaVersion: 2020
-  extraFileExtensions:
-    - .svelte
-env:
-  browser: true
-  es2017: true
-  node: true 
-rules:
-  '@typescript-eslint/ban-ts-comment': 
-    - error
-    - ts-ignore: 'allow-with-description'
+{
+  "root": true,
+  "extends": ["eslint:recommended", "prettier", "plugin:@typescript-eslint/recommended"],
+  "overrides": [
+    {
+      "files": ["*.svelte"],
+      "parser": "svelte-eslint-parser"
+    }
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2020,
+    "extraFileExtensions": [".svelte"]
+  },
+  "env": {
+    "browser": true,
+    "es2017": true,
+    "node": true
+  },
+  "rules": {
+    // allow console.log during development only
+    "no-console": ["error", { "allow": ["warn", "error", "debug"] }],
+    // allow ts-ignore with description
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      {
+        "ts-ignore": "allow-with-description"
+      }
+    ],
+    "no-inner-declarations": "off"
+  }
+}
