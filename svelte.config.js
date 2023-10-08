@@ -1,10 +1,10 @@
 import adapter from '@sveltejs/adapter-vercel';
-import { Config } from '@sveltejs/kit';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
+/** @type {import('@sveltejs/kit').Config} */
 export default {
   kit: {
     adapter: adapter()
   },
   preprocess: vitePreprocess()
-} as Config;
+};
