@@ -48,7 +48,7 @@ jobs:
         uses: oven-sh/setup-bun@v1
 
       - name: Test the build
-        run: bun build
+        run: bun run build
 
       - name: Test the code
         run: bun test
