@@ -63,9 +63,9 @@ If a blog post doesn't have any tag (in other words, frontmatter property `tags`
 export const blogSchema = z.object({
   // ---
   // replace "others" with whatever you want
-  tags: z.array(z.string()).default(["others"]),
+  tags: z.array(z.string()).default(['others']),
   ogImage: z.string().optional(),
-  description: z.string(),
+  description: z.string()
 });
 ```
 

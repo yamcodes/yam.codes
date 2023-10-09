@@ -7,7 +7,7 @@ featured: true
 ogImage: https://github.com/satnaing/astro-paper/assets/53733092/1ef0cf03-8137-4d67-ac81-84a032119e3a
 tags:
   - release
-description: "AstroPaper Version 3: Elevating Your Web Experience with Astro v3 and Seamless View Transitions"
+description: 'AstroPaper Version 3: Elevating Your Web Experience with Astro v3 and Seamless View Transitions'
 ---
 
 We're excited to announce the release of AstroPaper v3, packed with new features, enhancements, and bug fixes to elevate your web development experience. Let's dive into the highlights of this release:
@@ -138,7 +138,7 @@ For example: `src/components/Card.tsx`
 
 ```ts
 // AstroPaper v2
-import type { BlogFrontmatter } from "@content/_schemas";
+import type { BlogFrontmatter } from '@content/_schemas';
 
 export interface Props {
   href?: string;
@@ -149,11 +149,11 @@ export interface Props {
 
 ```ts
 // AstroPaper v3
-import type { CollectionEntry } from "astro:content";
+import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
   href?: string;
-  frontmatter: CollectionEntry<"blog">["data"];
+  frontmatter: CollectionEntry<'blog'>['data'];
   secHeading?: boolean;
 }
 ```

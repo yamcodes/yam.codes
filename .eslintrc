@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["eslint:recommended", "plugin:astro/recommended"],
+  "extends": ["eslint:recommended", "plugin:astro/recommended", "plugin:@typescript-eslint/recommended"],
   "overrides": [
     {
       "files": ["*.astro"],
@@ -31,6 +31,7 @@
         "ts-ignore": "allow-with-description"
       }
     ],
-    "no-inner-declarations": "off"
+    "no-inner-declarations": "off",
+    "@typescript-eslint/triple-slash-reference": "off"
   }
 }

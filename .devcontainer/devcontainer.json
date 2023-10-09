@@ -69,6 +69,7 @@
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "zsh .devcontainer/post-create.zsh",
   "postAttachCommand": "zsh .devcontainer/post-start.zsh",
+  "updateContentCommand": "bun i",
   "portsAttributes": {
     "4321": {
       "label": "App",
