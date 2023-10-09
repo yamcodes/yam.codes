@@ -5,10 +5,9 @@ import remarkToc from 'remark-toc';
 import remarkCollapse from 'remark-collapse';
 import sitemap from '@astrojs/sitemap';
 import { SITE } from './src/config';
+import node from '@astrojs/node';
 
 import vercel from '@astrojs/vercel/serverless';
-
-import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
@@ -42,7 +41,5 @@ export default defineConfig({
   },
   scopedStyleStrategy: 'where',
   output: 'server',
-  adapter: node({
-    mode: 'standalone'
-  })
+  adapter: vercel()
 });
