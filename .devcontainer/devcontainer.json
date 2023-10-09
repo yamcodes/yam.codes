@@ -7,6 +7,7 @@
   "workspaceFolder": "/workspace",
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [3000, 5000],
+  // 
   "features": {
     "common": {
       "username": "automatic",
@@ -21,7 +22,8 @@
       "dockerDashComposeVersion": "v2"
     },
     "github-cli": "latest",
-    "ghcr.io/shyim/devcontainers-features/bun:0": {}
+    "ghcr.io/shyim/devcontainers-features/bun:0": {},
+    "ghcr.io/devcontainers-contrib/features/vercel-cli:1": {}
   },
   "customizations": {
     "vscode": {
