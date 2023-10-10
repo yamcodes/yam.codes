@@ -30,8 +30,8 @@ jobs:
       - name: Install dependencies
         run: bun i
 
-      - name: Format
-        run: bun format
+      - name: Check formatting
+        run: bun format:check
 
       - name: Lint
         run: bun lint
