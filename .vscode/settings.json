@@ -5,6 +5,7 @@
     "devcontainer",
     "jampack",
     "resvg",
-    "shiki"
+    "shiki",
+    "squoosh"
   ]
 }

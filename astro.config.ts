@@ -1,14 +1,16 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, squooshImageService } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import remarkToc from 'remark-toc';
 import remarkCollapse from 'remark-collapse';
 import sitemap from '@astrojs/sitemap';
 import { SITE } from './src/config';
-import vercel from '@astrojs/vercel/static';
 
 // https://astro.build/config
 export default defineConfig({
+  image: {
+    service: squooshImageService(),
+  },
   site: SITE.website,
   integrations: [
     tailwind({
@@ -38,6 +40,4 @@ export default defineConfig({
     }
   },
   scopedStyleStrategy: 'where',
-  output: 'static',
-  adapter: vercel()
 });
