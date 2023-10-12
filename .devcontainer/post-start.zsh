@@ -1,2 +1,2 @@
 #!/bin/zsh
-bun dev --host
+pnpm run dev --host

@@ -1,5 +1,5 @@
 {
-  "name": "Bun (Bullseye)",
+  "name": "Pnpm (Bullseye)",
   "build": {
     "dockerfile": "Dockerfile"
   },
@@ -7,7 +7,7 @@
   "workspaceFolder": "/workspace",
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [3000, 5000],
-  // 
+  // https://containers.dev/features
   "features": {
     "common": {
       "username": "automatic",
@@ -22,8 +22,8 @@
       "dockerDashComposeVersion": "v2"
     },
     "github-cli": "latest",
-    "ghcr.io/shyim/devcontainers-features/bun:0": {},
-    "ghcr.io/devcontainers-contrib/features/vercel-cli:1": {}
+    "ghcr.io/devcontainers-contrib/features/vercel-cli:1": {},
+    "ghcr.io/devcontainers-contrib/features/pnpm:2": {}
   },
   "customizations": {
     "vscode": {
@@ -71,7 +71,7 @@
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "zsh .devcontainer/post-create.zsh",
   "postAttachCommand": "zsh .devcontainer/post-start.zsh",
-  "updateContentCommand": "bun i",
+  "updateContentCommand": "pnpm i",
   "portsAttributes": {
     "4321": {
       "label": "App",

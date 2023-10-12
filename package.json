@@ -3,17 +3,17 @@
   "version": "3.0.0",
   "private": false,
   "scripts": {
-    "dev": "bunx --bun astro dev",
-    "start": "bunx --bun astro dev",
+    "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
-    "preview": "bunx --bun astro preview",
-    "sync": "bunx --bun astro sync",
-    "astro": "bunx --bun astro",
+    "preview": "astro preview",
+    "sync": "astro sync",
+    "astro": "astro",
     "format:check": "prettier --plugin-search-dir=. --check .",
     "format": "prettier --plugin-search-dir=. --write .",
     "cz": "cz",
     "prepare": "husky install",
-    "lint": "bun format:check && eslint ."
+    "lint": "pnpm format:check && eslint ."
   },
   "dependencies": {
     "@astrojs/check": "^0.2.0",
@@ -42,7 +42,6 @@
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
     "astro-eslint-parser": "^0.15.0",
-    "bun-types": "^1.0.5-canary.20231009T140142",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.51.0",

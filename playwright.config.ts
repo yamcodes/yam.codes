@@ -2,7 +2,7 @@ import { PlaywrightTestConfig } from '@playwright/test';
 
 export default {
   webServer: {
-    command: 'bun build && bun preview',
+    command: 'pnpm build && pnpm preview',
     port: 4173
   },
   testDir: 'tests',
