@@ -64,8 +64,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json}": [
-      "prettier --plugin-search-dir=. --write",
-      "prettier --plugin-search-dir=. --check",
+      "prettier --write",
+      "prettier --check",
       "eslint"
     ]
   },
