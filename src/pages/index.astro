@@ -21,9 +21,10 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 
 <Layout>
   <Header />
+  
   <main id="main-content">
-    <section id="hero">
-      <h1 class="mr-2">Mingalaba</h1>
+    <section id="hero">     
+      <p> 
       <a
         target="_blank"
         href="/rss.xml"
@@ -39,33 +40,22 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           ></path><circle cx="6" cy="18" r="2"></circle>
         </svg>
       </a>
-
-      <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
-      </p>
-      <p>
-        Read the blog posts or check
-        <LinkButton
-          className="hover:text-skin-accent underline underline-offset-4 decoration-dashed"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
+        Hi! 👋 I'm Yam; a developer, designer, and an open-source enthusiast. 
+        <br/><br/>
+        I'm <i>obsessed</i> with learning new things and sharing my knowledge with others.
       </p>
       {
         // only display if at least one social link is enabled
         socialCount > 0 && (
           <div class="social-wrapper">
-            <div class="social-links">Social links:</div>
+            <div class="social-links">Find me on:</div>
             <Socials />
           </div>
         )
       }
+      
     </section>
-
+    
     <Hr />
 
     {
