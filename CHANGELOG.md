@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/yamcodes/yam.codes/compare/v1.1.0...v1.2.0) (2023-10-13)
+
+
+### Features
+
+* clean up README ([7a16d35](https://github.com/yamcodes/yam.codes/commit/7a16d35b328a8985b7b987fa7728f9341c1cba88))
+* rename astropaper to yamcodes ([c3fe684](https://github.com/yamcodes/yam.codes/commit/c3fe684e0f2bc7688477bfe4b4df8f1922fce7d9))
+
+
+### Bug Fixes
+
+* remove deprecated args from lint-staged ([c726a97](https://github.com/yamcodes/yam.codes/commit/c726a972f84f37be06428170ece35823570fed11))
+
 ## [1.1.0](https://github.com/yamcodes/yam.codes/compare/v1.0.0...v1.1.0) (2023-10-13)
 
 
