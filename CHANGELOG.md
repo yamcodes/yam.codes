@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/yamcodes/yam.codes/compare/v1.4.0...v1.4.1) (2023-10-13)
+
+
+### Bug Fixes
+
+* make og description shorter ([30a1289](https://github.com/yamcodes/yam.codes/commit/30a128900c5a1f21a2a9804a64d4a25e0d9f8e83))
+
 ## [1.4.0](https://github.com/yamcodes/yam.codes/compare/v1.3.0...v1.4.0) (2023-10-13)
 
 
