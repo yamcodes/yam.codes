@@ -66,3 +66,6 @@ package-lock.json
 bun.lockb
 yarn.lock
 >>>>>>> 3089ba8b54d690d1c68bc32e1e358de9952f8f64
+/test-results/
+/playwright-report/
+/playwright/.cache/
