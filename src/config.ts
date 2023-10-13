@@ -1,11 +1,11 @@
 import type { Site, SocialObjects } from './types';
 
 export const SITE: Site = {
-  website: 'https://astro-paper.pages.dev/', // replace this with your deployed domain
-  author: 'Sat Naing',
-  desc: 'A minimal, responsive and SEO-friendly Astro blog theme.',
+  website: 'https://yam.codes/', // replace this with your deployed domain
+  author: 'Yam Borodetsky',
+  desc: 'Yam Borodetsky is a developer, designer, and an open-source enthusiast. He is obsessed with learning new things and sharing knowledge with others',
   title: 'yam.codes',
-  ogImage: 'og-low-res.jpeg',
+  ogImage: 'og-low-res.jpg',
   lightAndDarkMode: true,
   postPerPage: 3
 };
