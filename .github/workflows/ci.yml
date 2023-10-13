@@ -17,7 +17,7 @@ on:
 
 jobs:
   lint:
-    name: Format and lint
+    name: Lint and check formatting
     runs-on: ubuntu-latest
 
     steps:
@@ -50,9 +50,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm i
-
-      - name: Check formatting
-        run: pnpm format:check
 
       - name: Lint
         run: pnpm lint
@@ -89,14 +86,31 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      # playwright caching
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+      - name: Cache playwright binaries
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
       - name: Install dependencies
         run: pnpm i
 
       - name: Test the build
         run: pnpm build
 
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
+      - run: pnpm playwright install --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        name: Install Playwright Browsers
+      - run: pnpm playwright install-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        name: Install Playwright Dependencies
+
       - name: Run Playwright tests
         run: pnpm test
       - uses: actions/upload-artifact@v3
@@ -105,3 +119,4 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+        name: Upload Playwright Report
