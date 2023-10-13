@@ -3,7 +3,7 @@ import type { Site, SocialObjects } from './types';
 export const SITE: Site = {
   website: 'https://yam.codes/', // replace this with your deployed domain
   author: 'yamcodes',
-  desc: 'A developer, designer, and open-source enthusiast.',
+  desc: 'Developer. Designer. Open-source enthusiast.',
   title: 'Yam Borodetsky',
   ogImage: 'og-low-res.jpg',
   lightAndDarkMode: true,
