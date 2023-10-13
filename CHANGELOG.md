@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/yamcodes/yam.codes/compare/v1.0.0...v1.1.0) (2023-10-13)
+
+
+### Features
+
+* lint js in markdown ([550b8c8](https://github.com/yamcodes/yam.codes/commit/550b8c8d44ca7ac98743bf62cb7c6eda26417aed))
+
+
+### Bug Fixes
+
+* clean up CHANGELOG ([2cdfd9b](https://github.com/yamcodes/yam.codes/commit/2cdfd9b6b3e0aeda6b6862561d4d93da522850d5))
+* stop linting markdown ([450d3eb](https://github.com/yamcodes/yam.codes/commit/450d3eb60ea666da9c8f1555718289c605b4b0ee))
+
 ## 1.0.0 (2023-10-13)
 
 
