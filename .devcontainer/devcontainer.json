@@ -58,9 +58,9 @@
     }
   },
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "zsh .devcontainer/post-create.zsh",
-  "postAttachCommand": "zsh .devcontainer/post-start.zsh",
-  // "updateContentCommand": "pnpm i",
+  "postCreateCommand": "zsh .devcontainer/commands/post-create.zsh",
+  "postAttachCommand": "zsh .devcontainer/commands/post-start.zsh",
+  "updateContentCommand": "zsh .devcontainer/commands/update-content.zsh",
   "portsAttributes": {
     "4321": {
       "label": "App",
