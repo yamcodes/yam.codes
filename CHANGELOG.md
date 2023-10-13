@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0](https://github.com/yamcodes/yam.codes/compare/v1.2.0...v1.3.0) (2023-10-13)
+
+
+### Features
+
+* format markdown in lint-staged ([1078afa](https://github.com/yamcodes/yam.codes/commit/1078afa0f265340a0559714702b89767eac678d4))
+* update og picture ([d43f213](https://github.com/yamcodes/yam.codes/commit/d43f2136fd49772c11b415b8898373c6449dacd0))
+
+
+### Bug Fixes
+
+* lint files ([1b6d20d](https://github.com/yamcodes/yam.codes/commit/1b6d20d56ecd5fffb7c072c950ff13d85bfb1e4f))
+
 ## [1.2.0](https://github.com/yamcodes/yam.codes/compare/v1.1.0...v1.2.0) (2023-10-13)
 
 
