@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["eslint:recommended", "plugin:astro/recommended", "plugin:@typescript-eslint/recommended", "plugin:markdown/recommended"],
+  "extends": ["eslint:recommended", "plugin:astro/recommended", "plugin:@typescript-eslint/recommended"],
   "overrides": [
     {
       "files": ["*.astro"],
