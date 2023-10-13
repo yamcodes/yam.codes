@@ -4,6 +4,7 @@
     "astrojs",
     "devcontainer",
     "jampack",
+    "preinstall",
     "resvg",
     "shiki",
     "squoosh"

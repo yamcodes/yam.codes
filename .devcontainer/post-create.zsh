@@ -1,2 +1,2 @@
 #!/bin/zsh
-echo "Looks like everything works as expected!"
+npm i -g swpm
