@@ -5,7 +5,7 @@ export const SITE: Site = {
   author: 'Sat Naing',
   desc: 'A minimal, responsive and SEO-friendly Astro blog theme.',
   title: 'yam.codes',
-  ogImage: 'astropaper-og.jpg',
+  ogImage: 'og-low-res.jpeg',
   lightAndDarkMode: true,
   postPerPage: 3
 };
