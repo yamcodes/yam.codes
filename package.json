@@ -63,6 +63,10 @@
     }
   },
   "lint-staged": {
+    "*.{md, mdx}": [
+      "prettier --write",
+      "prettier --check"
+    ],
     "*.{js,jsx,ts,tsx,json}": [
       "prettier --write",
       "prettier --check",
