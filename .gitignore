@@ -48,6 +48,7 @@ pnpm-debug.log*
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+<<<<<<< HEAD
 .github/workflows/ci.yml
 
 .pnpm-store
@@ -56,3 +57,12 @@ pnpm-debug.log*
 yarn.lock
 package-lock.json
 bun.lockb
+=======
+
+.pnpm-store
+
+# other package managers that aren't pnpm
+package-lock.json
+bun.lockb
+yarn.lock
+>>>>>>> 3089ba8b54d690d1c68bc32e1e358de9952f8f64

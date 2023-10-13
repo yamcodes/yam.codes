@@ -7,7 +7,7 @@
   "workspaceFolder": "/workspace",
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [3000, 5000],
-  // 
+  // https://containers.dev/features
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "configureZshAsDefaultShell": true
