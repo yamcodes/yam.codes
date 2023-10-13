@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/yamcodes/yam.codes/compare/v1.3.0...v1.4.0) (2023-10-13)
+
+
+### Features
+
+* add open graph description ([5931c7e](https://github.com/yamcodes/yam.codes/commit/5931c7ee6f8fc80d6f00f289950c1353aed44e03))
+
+
+### Bug Fixes
+
+* astro formatting ([203126b](https://github.com/yamcodes/yam.codes/commit/203126b2b46392b8821b635515d453d428d4e834))
+
 ## [1.3.0](https://github.com/yamcodes/yam.codes/compare/v1.2.0...v1.3.0) (2023-10-13)
 
 
