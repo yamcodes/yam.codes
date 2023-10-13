@@ -67,7 +67,7 @@
       "prettier --write",
       "prettier --check"
     ],
-    "*.{js,jsx,ts,tsx,json}": [
+    "*.{js,jsx,ts,tsx,json,astro}": [
       "prettier --write",
       "prettier --check",
       "eslint"

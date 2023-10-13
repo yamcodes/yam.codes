@@ -4,15 +4,11 @@ on:
   pull_request:
     branches: [main]
     paths:
-      # only typescript/json should be linted and formatted
-      - '**.json'
-      - '**.ts'
+      - '*.{js,jsx,ts,tsx,json,astro}'
   push:
     branches: [main]
     paths:
-      # only typescript/json should be linted and formatted
-      - '**.json'
-      - '**.ts'
+      - '*.{js,jsx,ts,tsx,json,astro}'
   workflow_dispatch:
 
 jobs:
