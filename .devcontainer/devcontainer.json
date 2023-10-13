@@ -1,5 +1,5 @@
 {
-  "name": "Bun (Bullseye)",
+  "name": "Pnpm (Bullseye)",
   "build": {
     "dockerfile": "Dockerfile"
   },
@@ -9,21 +9,12 @@
   // "forwardPorts": [3000, 5000],
   // 
   "features": {
-    "common": {
-      "username": "automatic",
-      "uid": "automatic",
-      "gid": "automatic",
-      "installZsh": true,
-      "upgradePackages": true
-    },
-    "docker-from-docker": {
-      "version": "latest",
-      "moby": false,
-      "dockerDashComposeVersion": "v2"
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true
     },
     "github-cli": "latest",
-    "ghcr.io/shyim/devcontainers-features/bun:0": {},
-    "ghcr.io/devcontainers-contrib/features/vercel-cli:1": {}
+    "ghcr.io/devcontainers-contrib/features/vercel-cli:1": {},
+    "ghcr.io/devcontainers-contrib/features/pnpm:2": {}
   },
   "customizations": {
     "vscode": {
@@ -71,15 +62,21 @@
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "zsh .devcontainer/post-create.zsh",
   "postAttachCommand": "zsh .devcontainer/post-start.zsh",
-  "updateContentCommand": "bun i",
+  // "updateContentCommand": "pnpm i",
   "portsAttributes": {
     "4321": {
       "label": "App",
       "onAutoForward": "openPreview"
     }
   },
-  "forwardPorts": [4321]
+  "forwardPorts": [4321],
   // "overrideCommand": false,
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   // "remoteUser": "vscode"
+  
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    "source=${localWorkspaceFolderBasename}-dist,target=${containerWorkspaceFolder}/dist,type=volume",
+    "source=pnpm-cache,target=${containerWorkspaceFolder}/.pnpm-store,type=volume"
+  ]
 }
