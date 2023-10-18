@@ -9,6 +9,6 @@
 
 ---
 
-<samp>licensed under [MIT](LICENSE.md)</samp>
+<samp>licensed under [MIT](LICENSE)</samp>
 
 </div>
