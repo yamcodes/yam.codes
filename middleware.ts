@@ -5,5 +5,5 @@ export const config = {
 };
  
 export default function middleware(_request: Request) {
-  return rewrite(new URL('https://yamcodes.github.com/ark.env'));
+  return rewrite(new URL('https://yamcodes.github.io/ark.env'));
 }
