@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/ark.env",
+      "destination": "https://yamcodes.github.io/ark.env"
+    }
+  ]
+}
