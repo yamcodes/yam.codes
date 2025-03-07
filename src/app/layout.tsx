@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "My Website",
+	title: "Yam Borodetsky",
 	description: "A simple two-page website",
 };
 
