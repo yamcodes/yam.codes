@@ -10,7 +10,8 @@
 		"clean": "rimraf .next node_modules",
 		"fix": "biome check --fix",
 		"check": "biome check",
-		"check:errors": "biome check --diagnostic-level=error"
+		"check:errors": "biome check --diagnostic-level=error",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@icons-pack/react-simple-icons": "^12.1.0",
