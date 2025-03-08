@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter } from "~/components/ui/card";
 interface Project {
 	title: string;
 	description: string;
-	image: string;
+	image?: string;
 	tags: string[];
 	links: {
 		live?: string;
