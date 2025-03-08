@@ -18,6 +18,33 @@ import {
 } from "~/components/ui/tooltip";
 import { Button } from "./ui/button";
 
+type SocialLinkProps = {
+	href: string;
+	icon: React.ReactNode;
+	label: string;
+};
+
+function SocialLink({ href, icon, label }: SocialLinkProps) {
+	return (
+		<Tooltip>
+			<TooltipTrigger asChild>
+				<a
+					href={href}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-muted-foreground hover:text-foreground transition-colors"
+				>
+					{icon}
+					<span className="sr-only">{label}</span>
+				</a>
+			</TooltipTrigger>
+			<TooltipContent side="bottom">
+				<p>{label}</p>
+			</TooltipContent>
+		</Tooltip>
+	);
+}
+
 export default function Header() {
 	const isHome = usePathname() === "/";
 	return (
@@ -36,56 +63,21 @@ export default function Header() {
 
 				<div className="flex items-center space-x-6">
 					<TooltipProvider>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<a
-									href="https://github.com/yamcodes"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-muted-foreground hover:text-foreground transition-colors"
-								>
-									<GitHub size={20} />
-									<span className="sr-only">GitHub</span>
-								</a>
-							</TooltipTrigger>
-							<TooltipContent side="bottom">
-								<p>GitHub</p>
-							</TooltipContent>
-						</Tooltip>
-
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<a
-									href="https://mastodon.social/@yamcodes"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-muted-foreground hover:text-foreground transition-colors"
-								>
-									<Mastodon size={20} />
-									<span className="sr-only">Mastodon</span>
-								</a>
-							</TooltipTrigger>
-							<TooltipContent side="bottom">
-								<p>Mastodon</p>
-							</TooltipContent>
-						</Tooltip>
-
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<a
-									href="https://linkedin.com/in/yamyam263"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-muted-foreground hover:text-foreground transition-colors"
-								>
-									<Linkedin size={20} />
-									<span className="sr-only">LinkedIn</span>
-								</a>
-							</TooltipTrigger>
-							<TooltipContent side="bottom">
-								<p>LinkedIn</p>
-							</TooltipContent>
-						</Tooltip>
+						<SocialLink
+							href="https://github.com/yamcodes"
+							icon={<GitHub size={20} />}
+							label="GitHub"
+						/>
+						<SocialLink
+							href="https://mastodon.social/@yamcodes"
+							icon={<Mastodon size={20} />}
+							label="Mastodon"
+						/>
+						<SocialLink
+							href="https://linkedin.com/in/yamyam263"
+							icon={<Linkedin size={20} />}
+							label="LinkedIn"
+						/>
 					</TooltipProvider>
 					<ModeToggle />
 				</div>
