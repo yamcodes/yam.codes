@@ -6,7 +6,7 @@ export default function Footer() {
 					© {new Date().getFullYear()} Yam Borodetsky. All rights reserved.
 				</div>
 				<div className="text-sm text-muted-foreground mt-2 md:mt-0">
-					Handmade with Next.js
+					Handmade with Next.js 15
 				</div>
 			</div>
 		</footer>
