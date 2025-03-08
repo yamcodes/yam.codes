@@ -4,9 +4,10 @@ import projects from "~/data/projects.json";
 
 const idify = (text: string) => {
 	return text
-		.toLowerCase()
-		.replace(/ /g, "-")
-		.replace(/[^\w-]+/g, "");
+		.toLowerCase() // lowercase
+		.replace(/ /g, "-") // replace spaces with dashes
+		.replace(/[^\w-]+/g, "") // remove non-word characters
+		.replace(/^-+|-+$/g, ""); // trailing and leading dashes
 };
 
 export default function ProjectsPage() {
