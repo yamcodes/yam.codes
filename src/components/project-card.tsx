@@ -18,23 +18,36 @@ interface Project {
 
 interface ProjectCardProps {
 	project: Project;
+	/**
+	 * Default to GitHub Open Graph when no image is provided.
+	 * @default false
+	 */
+	useGitHubOpenGraph?: boolean;
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({
+	project,
+	useGitHubOpenGraph = false,
+}: ProjectCardProps) {
+	const showImage =
+		project.image || (useGitHubOpenGraph && project.links.github);
 	return (
 		<Card className="overflow-hidden flex flex-col h-full">
-			<div className="relative h-48 w-full">
-				<Image
-					src={
-						project.links.github
-							? `https://opengraph.githubassets.com/1/${new URL(project.links.github).pathname.slice(1)}`
-							: project.image || "/placeholder.svg"
-					}
-					alt={project.title}
-					fill
-					className="object-cover"
-				/>
-			</div>
+			{showImage && (
+				<div className="relative h-48 w-full">
+					<Image
+						src={
+							project.image
+								? project.image
+								: // biome-ignore lint/style/noNonNullAssertion: `showImage` makes sure that `project.links.github` is not undefined if `!project.image`.
+									`https://opengraph.githubassets.com/1/${new URL(project.links.github!).pathname.slice(1)}`
+						}
+						alt={project.title}
+						fill
+						className="object-cover"
+					/>
+				</div>
+			)}
 			<CardContent className="flex-1 p-6">
 				<h3 className="text-xl font-semibold mb-2">{project.title}</h3>
 				<p className="text-muted-foreground mb-4">{project.description}</p>

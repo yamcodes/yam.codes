@@ -19,7 +19,10 @@ export default function Home() {
 						</h1>
 						<HoverCard>
 							<HoverCardTrigger asChild>
-								<Button variant="link" className="p-0 hover:decoration-dotted hover:cursor-help">
+								<Button
+									variant="link"
+									className="p-0 hover:decoration-dotted hover:cursor-help"
+								>
 									@yamcodes
 								</Button>
 							</HoverCardTrigger>
@@ -62,10 +65,10 @@ export default function Home() {
 					</p>
 
 					<p>
-						Currently, I'm working as a full-stack developer at Zynga,
-						where I lead the engineering of scalable platform solutions. Every
-						day I tackle challenges using TypeScript, React, Node.js, NestJS,
-						Firebase and Google Cloud.
+						Currently, I'm working as a full-stack developer at Zynga, where I
+						lead the engineering of scalable platform solutions. Every day I
+						tackle challenges using TypeScript, React, Node.js, NestJS, Firebase
+						and Google Cloud.
 					</p>
 
 					<p>
@@ -79,13 +82,10 @@ export default function Home() {
 				<div className="flex flex-col sm:flex-row gap-4 pt-4">
 					<Button
 						asChild
-						size="lg"
-						className="bg-gradient-to-br from-primary-lighter to-primary hover:scale-98 active:scale-95 transition-transform"
+						size="xl"
+						className="rounded-sm bg-gradient-to-br from-primary-lighter to-primary hover:scale-98 active:scale-95 transition-transform"
 					>
 						<Link href="/projects">View my projects --&gt;</Link>
-					</Button>
-					<Button variant="outline" asChild size="lg">
-						<a href="mailto:hi@yam.codes">Let's connect</a>
 					</Button>
 				</div>
 			</div>

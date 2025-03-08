@@ -2,7 +2,6 @@
 	{
 		"title": "ark.env",
 		"description": "⛵ Typesafe environment variables powered by ArkType",
-		"image": "/placeholder.svg?height=300&width=600",
 		"tags": ["nodejs", "typescript", "environment-variables", "arktype"],
 		"links": {
 			"github": "https://github.com/yamcodes/ark.env",
@@ -12,7 +11,6 @@
 	{
 		"title": "🌲 pino-nestjs 🐱",
 		"description": "Drop-in Pino logger for NestJS with request context in every log",
-		"image": "/placeholder.svg?height=300&width=600",
 		"tags": ["nodejs", "nestjs", "typescript", "pino", "logger"],
 		"links": {
 			"github": "https://github.com/yamcodes/pino-nestjs",
@@ -22,7 +20,6 @@
 	{
 		"title": "yam.codes",
 		"description": "This site! An about page built with modern web technologies and optimized for performance.",
-		"image": "/placeholder.svg?height=300&width=600",
 		"tags": ["nextjs", "typescript", "tailwindcss"],
 		"links": {
 			"live": "https://yam.codes",
@@ -32,7 +29,6 @@
 	{
 		"title": "The BED Stack",
 		"description": "RealWorld example app for Bun + ElysiaJS + DrizzleORM, the stack you don't want to sleep on 🛌💤",
-		"image": "/placeholder.svg?height=300&width=600",
 		"tags": ["bun", "elysiajs", "drizzleorm"],
 		"links": {
 			"docs": "https://agnyz.github.io/the-bed-stack",

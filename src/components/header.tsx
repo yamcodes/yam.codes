@@ -4,8 +4,10 @@ import {
 	SiGithub as GitHub,
 	SiMastodon as Mastodon,
 } from "@icons-pack/react-simple-icons";
+import clsx from "clsx";
 import { Linkedin } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ModeToggle } from "~/components/mode-toggle";
 import { PathSwitcher } from "~/components/path-switcher";
 import {
@@ -15,9 +17,6 @@ import {
 	TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { Button } from "./ui/button";
-import clsx from "clsx";
-import { usePathname } from "next/navigation";
-
 
 export default function Header() {
 	const isHome = usePathname() === "/";
@@ -25,7 +24,11 @@ export default function Header() {
 		<header className="border-b">
 			<div className="container max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
 				<div className="flex items-center gap-1">
-					<Button variant="ghost" className={clsx("px-2", isHome ? " font-semibold" : "font-normal")} asChild>
+					<Button
+						variant="ghost"
+						className={clsx("px-2", isHome ? " font-semibold" : "font-normal")}
+						asChild
+					>
 						<Link href="/">yam.codes</Link>
 					</Button>
 					<PathSwitcher />
