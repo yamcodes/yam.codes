@@ -38,7 +38,7 @@ export default function Home() {
 										</h4>
 										<h4 className="text-sm text-muted-foreground">@yamcodes</h4>
 										<p className="text-sm">
-											Full-time Software Engineer ܁ Part-time Open Sourcerer
+											Full-time Software Engineer · Part-time Open Sourcerer
 										</p>
 										<div className="flex items-center pt-2">
 											<BriefcaseBusiness className="mr-2 h-4 w-4 opacity-70" />{" "}
@@ -52,7 +52,7 @@ export default function Home() {
 						</HoverCard>
 					</div>
 					<p className="text-l text-muted-foreground">
-						Full-time Software Engineer ܁ Part-time Open Sourcerer
+						Full-time Software Engineer · Part-time Open Sourcerer
 					</p>
 				</div>
 

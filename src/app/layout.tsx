@@ -9,7 +9,7 @@ import { ThemeProvider } from "~/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Yam Borodetsky ܁ Software Engineer",
+	title: "Yam Borodetsky · Software Engineer",
 	description:
 		"Yam Borodetsky is a software engineer specializing in full-stack development",
 };
