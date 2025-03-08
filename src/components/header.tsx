@@ -1,6 +1,7 @@
 "use client";
 
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Linkedin } from "lucide-react";
+import { SiGithub as GitHub, SiMastodon as Mastodon } from "@icons-pack/react-simple-icons"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "~/components/mode-toggle";
@@ -37,25 +38,25 @@ export default function Header() {
 				<div className="flex items-center space-x-4">
 					<div className="flex items-center space-x-3">
 						<a
-							href="https://github.com/alexmorgan"
+							href="https://github.com/yamcodes"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-muted-foreground hover:text-primary transition-colors"
 						>
-							<Github size={20} />
+							<GitHub size={20} />
 							<span className="sr-only">GitHub</span>
 						</a>
 						<a
-							href="https://twitter.com/alexmorgan"
+							href="https://mastodon.social/@yamcodes"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-muted-foreground hover:text-primary transition-colors"
 						>
-							<Twitter size={20} />
-							<span className="sr-only">Twitter</span>
+							<Mastodon size={20} />
+							<span className="sr-only">Mastodon</span>
 						</a>
 						<a
-							href="https://linkedin.com/in/alexmorgan"
+							href="https://linkedin.com/in/yamyam263"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-muted-foreground hover:text-primary transition-colors"
