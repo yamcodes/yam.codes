@@ -40,7 +40,14 @@ export function ProjectCard({
 							project.image
 								? project.image
 								: // biome-ignore lint/style/noNonNullAssertion: `showImage` makes sure that `project.links.github` is not undefined if `!project.image`.
-									`https://opengraph.githubassets.com/1/${new URL(project.links.github!).pathname.slice(1)}`
+									`https://opengraph.githubassets.com/1/${(() => {
+									  try {
+									    return new URL(project.links.github!).pathname.slice(1);
+									  } catch (e) {
+									    // Return a fallback or empty string if URL parsing fails
+									    return "";
+									  }
+									})()}`
 						}
 						alt={project.title}
 						fill
