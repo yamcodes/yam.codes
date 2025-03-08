@@ -39,14 +39,14 @@ export function ProjectCard({
 						src={
 							project.image
 								? project.image
-								: // biome-ignore lint/style/noNonNullAssertion: `showImage` makes sure that `project.links.github` is not undefined if `!project.image`.
-									`https://opengraph.githubassets.com/1/${(() => {
-									  try {
-									    return new URL(project.links.github!).pathname.slice(1);
-									  } catch (e) {
-									    // Return a fallback or empty string if URL parsing fails
-									    return "";
-									  }
+								: `https://opengraph.githubassets.com/1/${(() => {
+										try {
+											// biome-ignore lint/style/noNonNullAssertion: `showImage` makes sure that `project.links.github` is not undefined if `!project.image`.
+											return new URL(project.links.github!).pathname.slice(1);
+										} catch (e) {
+											// Return a fallback or empty string if URL parsing fails
+											return "";
+										}
 									})()}`
 						}
 						alt={project.title}
