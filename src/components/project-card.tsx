@@ -25,7 +25,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
 		<Card className="overflow-hidden flex flex-col h-full">
 			<div className="relative h-48 w-full">
 				<Image
-					src={project.image || "/placeholder.svg"}
+					src={
+						project.links.github
+							? `https://opengraph.githubassets.com/1/${new URL(project.links.github).pathname.slice(1)}`
+							: project.image || "/placeholder.svg"
+					}
 					alt={project.title}
 					fill
 					className="object-cover"

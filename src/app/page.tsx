@@ -38,11 +38,15 @@ export default function Home() {
 				</div>
 
 				<div className="flex flex-col sm:flex-row gap-4 pt-4">
-					<Button asChild>
-						<Link href="/projects">View Projects</Link>
+					<Button
+						asChild
+						size="lg"
+						className="bg-gradient-to-b from-[#fec264] to-[#ffb84d] hover:scale-95 transition-transform duration-200"
+					>
+						<Link href="/projects">View my projects --&gt;</Link>
 					</Button>
-					<Button variant="outline" asChild>
-						<a href="mailto:contact@alexmorgan.dev">Contact Me</a>
+					<Button variant="outline" asChild size="lg">
+						<a href="mailto:hi@yam.codes">Let's connect</a>
 					</Button>
 				</div>
 			</div>

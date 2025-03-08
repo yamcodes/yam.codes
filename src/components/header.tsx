@@ -1,39 +1,29 @@
 "use client";
 
+import {
+	SiGithub as GitHub,
+	SiMastodon as Mastodon,
+} from "@icons-pack/react-simple-icons";
 import { Linkedin } from "lucide-react";
-import { SiGithub as GitHub, SiMastodon as Mastodon } from "@icons-pack/react-simple-icons"
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { ModeToggle } from "~/components/mode-toggle";
-import { cn } from "~/lib/utils";
+import { PathSwitcher } from "~/components/path-switcher";
 
 export default function Header() {
-	const pathname = usePathname();
-
-	const navItems = [
-		{ name: "Home", path: "/" },
-		{ name: "Projects", path: "/projects" },
-	];
-
 	return (
 		<header className="border-b">
-			<div className="container max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-				<nav className="flex items-center space-x-6">
-					{navItems.map((item) => (
-						<Link
-							key={item.path}
-							href={item.path}
-							className={cn(
-								"text-sm font-medium transition-colors hover:text-primary",
-								pathname === item.path
-									? "text-primary"
-									: "text-muted-foreground",
-							)}
-						>
-							{item.name}
-						</Link>
-					))}
-				</nav>
+			<div className="container max-w-6xl mx-auto px-4 py-8 flex items-center justify-between">
+				<div className="flex items-center gap-2">
+					<Link
+						href="/"
+						className="text-l font-bold tracking-tight transition-colors"
+					>
+						yam.codes
+					</Link>
+					<nav className="flex items-center space-x-6">
+						<PathSwitcher />
+					</nav>
+				</div>
 
 				<div className="flex items-center space-x-4">
 					<div className="flex items-center space-x-3">

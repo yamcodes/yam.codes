@@ -35,7 +35,7 @@
 		"image": "/placeholder.svg?height=300&width=600",
 		"tags": ["bun", "elysiajs", "drizzleorm"],
 		"links": {
-			"live": "https://agnyz.github.io/the-bed-stack",
+			"docs": "https://agnyz.github.io/the-bed-stack",
 			"github": "https://github.com/agnyz/the-bed-stack"
 		}
 	}
