@@ -2,6 +2,13 @@ import { ProjectCard } from "~/components/project-card";
 
 import projects from "~/data/projects.json";
 
+const idify = (text: string) => {
+	return text
+		.toLowerCase()
+		.replace(/ /g, "-")
+		.replace(/[^\w-]+/g, "");
+};
+
 export default function ProjectsPage() {
 	return (
 		<div className="container max-w-6xl mx-auto px-4 py-12 md:py-24">
@@ -14,8 +21,8 @@ export default function ProjectsPage() {
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
-					{projects.map((project, index) => (
-						<ProjectCard key={`project-${index}`} project={project} />
+					{projects.map((project) => (
+						<ProjectCard key={idify(project.title)} project={project} />
 					))}
 				</div>
 			</div>
