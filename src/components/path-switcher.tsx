@@ -82,7 +82,12 @@ export function PathSwitcher({ title }: PathSwitcherProps) {
 		},
 	];
 
-	const currentPath = paths.find((p) => p.path === pathname) || paths[0];
+	// Check for exact match first, then for partial match, with a guaranteed fallback to maintain PathItem type
+	const currentPath =
+		paths.find((p) => p.path === pathname) ||
+		paths.find((p) => pathname.startsWith(p.path) && p.path !== "/") ||
+		paths.find((p) => p.path === "/") ||
+		paths[0];
 
 	return (
 		<DropdownMenu>
