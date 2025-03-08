@@ -41,7 +41,7 @@ export default function Home() {
 					<Button
 						asChild
 						size="lg"
-						className="bg-gradient-to-b from-[#fec264] to-[#ffb84d] hover:scale-95 transition-transform duration-200"
+						className="bg-gradient-to-br from-primary-lighter to-primary hover:scale-95 transition-transform duration-200"
 					>
 						<Link href="/projects">View my projects --&gt;</Link>
 					</Button>

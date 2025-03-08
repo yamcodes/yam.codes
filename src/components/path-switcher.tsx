@@ -30,7 +30,7 @@ export function PathSwitcher({ title }: PathSwitcherProps = {}) {
 
 	const paths: PathItem[] = [
 		{ name: "/", path: "/", description: "Home" },
-		{ name: "/projects", path: "/projects", description: "Projects" },
+		{ name: "/projects", path: "/projects", description: "My open-source projects" },
 	];
 
 	const currentPath = paths.find((p) => p.path === pathname) || paths[0];
