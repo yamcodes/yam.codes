@@ -60,6 +60,16 @@
 }
 
 @layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+  }
+
+  .dark {
+    --background: 26 6% 10.2%;
+    --foreground: 60 5% 87.1%;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
