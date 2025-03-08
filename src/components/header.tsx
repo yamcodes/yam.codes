@@ -15,19 +15,18 @@ import {
 	TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { Button } from "./ui/button";
+import clsx from "clsx";
+import { usePathname } from "next/navigation";
+
 
 export default function Header() {
+	const isHome = usePathname() === "/";
 	return (
 		<header className="border-b">
 			<div className="container max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
 				<div className="flex items-center gap-1">
-					<Button variant="ghost" className="px-2"
-						asChild>
-						<Link
-							href="/"
-						>
-							yam.codes
-						</Link>
+					<Button variant="ghost" className={clsx("px-2", isHome ? " font-semibold" : "font-normal")} asChild>
+						<Link href="/">yam.codes</Link>
 					</Button>
 					<PathSwitcher />
 				</div>

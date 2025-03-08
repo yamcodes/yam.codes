@@ -1,17 +1,12 @@
-import Link from "next/link";
 import { BriefcaseBusiness } from "lucide-react";
+import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
 } from "~/components/ui/hover-card";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "~/components/ui/avatar";
-
 
 export default function Home() {
 	return (
@@ -24,7 +19,9 @@ export default function Home() {
 						</h1>
 						<HoverCard>
 							<HoverCardTrigger asChild>
-								<Button variant="link" className="p-0">@yamcodes</Button>
+								<Button variant="link" className="p-0 hover:decoration-dotted hover:cursor-help">
+									@yamcodes
+								</Button>
 							</HoverCardTrigger>
 							<HoverCardContent className="w-80">
 								<div className="flex justify-between space-x-4">
@@ -33,7 +30,9 @@ export default function Home() {
 										<AvatarFallback>YB</AvatarFallback>
 									</Avatar>
 									<div className="space-y-1">
-										<h4 className="text-sm font-semibold mb-0">Yam Borodetsky</h4>
+										<h4 className="text-sm font-semibold mb-0">
+											Yam Borodetsky
+										</h4>
 										<h4 className="text-sm text-muted-foreground">@yamcodes</h4>
 										<p className="text-sm">
 											Full-time Software Engineer ܁ Part-time Open Sourcerer
@@ -63,7 +62,7 @@ export default function Home() {
 					</p>
 
 					<p>
-						Currently, I'm working as a senior full stack developer at Zynga,
+						Currently, I'm working as a full-stack developer at Zynga,
 						where I lead the engineering of scalable platform solutions. Every
 						day I tackle challenges using TypeScript, React, Node.js, NestJS,
 						Firebase and Google Cloud.
