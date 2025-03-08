@@ -70,7 +70,7 @@ type PathSwitcherProps = {
 	title?: string;
 };
 
-export function PathSwitcher({ title }: PathSwitcherProps = {}) {
+export function PathSwitcher({ title }: PathSwitcherProps) {
 	const pathname = usePathname();
 
 	const paths: PathItem[] = [
