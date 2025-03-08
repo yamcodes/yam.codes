@@ -59,12 +59,25 @@ export function PathSwitcher({ title }: PathSwitcherProps = {}) {
 					</>
 				)}
 				{paths.map((path) => (
-					<DropdownMenuItem key={path.path} asChild className="gap-2 p-2">
+					<DropdownMenuItem 
+						key={path.path} 
+						asChild 
+						className={cn(
+							"gap-2 p-2",
+							pathname === path.path && "bg-accent/60"
+						)}
+					>
 						<Link href={path.path}>
 							<div className="flex flex-col">
-								<span className="font-medium">{path.name}</span>
+								<span className={cn(
+									"font-medium",
+									pathname === path.path && "text-accent-foreground"
+								)}>{path.name}</span>
 								{path.description && (
-									<span className="text-xs text-muted-foreground">
+									<span className={cn(
+										"text-xs text-muted-foreground",
+										pathname === path.path && "text-accent-foreground/80"
+									)}>
 										{path.description}
 									</span>
 								)}
