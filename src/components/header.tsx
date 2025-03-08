@@ -14,21 +14,22 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "~/components/ui/tooltip";
+import { Button } from "./ui/button";
 
 export default function Header() {
 	return (
 		<header className="border-b">
 			<div className="container max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
-				<div className="flex items-center gap-2">
-					<Link
-						href="/"
-						className="text-l font-bold tracking-tight transition-colors"
-					>
-						yam.codes
-					</Link>
-					<nav className="flex items-center space-x-6">
-						<PathSwitcher />
-					</nav>
+				<div className="flex items-center gap-1">
+					<Button variant="ghost" className="px-2"
+						asChild>
+						<Link
+							href="/"
+						>
+							yam.codes
+						</Link>
+					</Button>
+					<PathSwitcher />
 				</div>
 
 				<div className="flex items-center space-x-6">
