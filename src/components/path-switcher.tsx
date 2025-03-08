@@ -28,15 +28,12 @@ function PathSwitcherItem({
 	path: PathItem;
 	currentPath: string;
 }) {
-	const isExternalLink = path.path.startsWith('http');
+	const isExternalLink = path.path.startsWith("http");
 
 	return (
 		<DropdownMenuItem
 			asChild
-			className={cn(
-				"gap-2 p-2",
-				currentPath === path.path && "bg-accent/60",
-			)}
+			className={cn("gap-2 p-2", currentPath === path.path && "bg-accent/60")}
 		>
 			<Link href={path.path}>
 				<div className="flex flex-col">
@@ -117,15 +114,15 @@ export function PathSwitcher({ title }: PathSwitcherProps = {}) {
 						currentPath={pathname}
 					/>
 				))}
-        <PathSwitcherItem
-          key="my-key"
-          path={{
-            name: "/ark.env",
-            path: "https://yam.codes/ark.env",
-            description: "⛵ Typesafe environment variables powered by ArkType",
-          }}
-          currentPath={pathname}
-        />
+				<PathSwitcherItem
+					key="my-key"
+					path={{
+						name: "/ark.env",
+						path: "https://yam.codes/ark.env",
+						description: "⛵ Typesafe environment variables powered by ArkType",
+					}}
+					currentPath={pathname}
+				/>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
