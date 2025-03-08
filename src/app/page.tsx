@@ -1,16 +1,56 @@
 import Link from "next/link";
+import { BriefcaseBusiness } from "lucide-react";
 import { Button } from "~/components/ui/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "~/components/ui/hover-card";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "~/components/ui/avatar";
+
 
 export default function Home() {
 	return (
 		<div className="container max-w-4xl mx-auto px-4 py-12 md:py-24">
 			<div className="space-y-8">
 				<div className="space-y-4">
-					<h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-						Yam Borodetsky
-					</h1>
-					<p className="text-xl text-muted-foreground">
-						{"Full-time Software Engineer // Part-time Open Sourcerer"}
+					<div>
+						<h1 className="text-4xl font-bold tracking-tight">
+							Yam Borodetsky
+						</h1>
+						<HoverCard>
+							<HoverCardTrigger asChild>
+								<Button variant="link" className="p-0">@yamcodes</Button>
+							</HoverCardTrigger>
+							<HoverCardContent className="w-80">
+								<div className="flex justify-between space-x-4">
+									<Avatar>
+										<AvatarImage src="https://github.com/yamcodes.png" />
+										<AvatarFallback>YB</AvatarFallback>
+									</Avatar>
+									<div className="space-y-1">
+										<h4 className="text-sm font-semibold mb-0">Yam Borodetsky</h4>
+										<h4 className="text-sm text-muted-foreground">@yamcodes</h4>
+										<p className="text-sm">
+											Full-time Software Engineer ܁ Part-time Open Sourcerer
+										</p>
+										<div className="flex items-center pt-2">
+											<BriefcaseBusiness className="mr-2 h-4 w-4 opacity-70" />{" "}
+											<span className="text-xs text-muted-foreground">
+												Full-Stack Developer at Zynga
+											</span>
+										</div>
+									</div>
+								</div>
+							</HoverCardContent>
+						</HoverCard>
+					</div>
+					<p className="text-l text-muted-foreground">
+						Full-time Software Engineer ܁ Part-time Open Sourcerer
 					</p>
 				</div>
 
@@ -41,7 +81,7 @@ export default function Home() {
 					<Button
 						asChild
 						size="lg"
-						className="bg-gradient-to-br from-primary-lighter to-primary hover:scale-95 transition-transform duration-200"
+						className="bg-gradient-to-br from-primary-lighter to-primary hover:scale-98 active:scale-95 transition-transform"
 					>
 						<Link href="/projects">View my projects --&gt;</Link>
 					</Button>

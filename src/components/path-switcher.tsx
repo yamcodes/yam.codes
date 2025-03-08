@@ -41,7 +41,7 @@ export function PathSwitcher({ title }: PathSwitcherProps = {}) {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className="py-2 pl-3 flex items-center gap-1 text-sm font-medium hover:bg-accent hover:cursor-pointer rounded-sm">
+			<DropdownMenuTrigger className="py-2 pl-2 flex items-center gap-1 text-sm font-medium hover:bg-accent hover:cursor-pointer rounded-sm">
 				<span
 					className={cn(
 						pathname === currentPath.path
