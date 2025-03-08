@@ -30,7 +30,11 @@ export function PathSwitcher({ title }: PathSwitcherProps = {}) {
 
 	const paths: PathItem[] = [
 		{ name: "/", path: "/", description: "Home" },
-		{ name: "/projects", path: "/projects", description: "My open-source projects" },
+		{
+			name: "/projects",
+			path: "/projects",
+			description: "My open-source projects",
+		},
 	];
 
 	const currentPath = paths.find((p) => p.path === pathname) || paths[0];
@@ -59,25 +63,31 @@ export function PathSwitcher({ title }: PathSwitcherProps = {}) {
 					</>
 				)}
 				{paths.map((path) => (
-					<DropdownMenuItem 
-						key={path.path} 
-						asChild 
+					<DropdownMenuItem
+						key={path.path}
+						asChild
 						className={cn(
 							"gap-2 p-2",
-							pathname === path.path && "bg-accent/60"
+							pathname === path.path && "bg-accent/60",
 						)}
 					>
 						<Link href={path.path}>
 							<div className="flex flex-col">
-								<span className={cn(
-									"font-medium",
-									pathname === path.path && "text-accent-foreground"
-								)}>{path.name}</span>
+								<span
+									className={cn(
+										"font-medium",
+										pathname === path.path && "text-accent-foreground",
+									)}
+								>
+									{path.name}
+								</span>
 								{path.description && (
-									<span className={cn(
-										"text-xs text-muted-foreground",
-										pathname === path.path && "text-accent-foreground/80"
-									)}>
+									<span
+										className={cn(
+											"text-xs text-muted-foreground",
+											pathname === path.path && "text-accent-foreground/80",
+										)}
+									>
 										{path.description}
 									</span>
 								)}
