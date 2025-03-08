@@ -35,15 +35,14 @@ export function ModeToggle() {
 		<TooltipProvider>
 			<Tooltip>
 				<TooltipTrigger asChild>
-					<Button
-						variant="ghost"
-						size="icon"
+					<button
+						type="button"
 						onClick={() => setTheme(isDark ? "light" : "dark")}
-						className="text-muted-foreground hover:text-primary transition-colors"
+						className="text-muted-foreground hover:text-foreground hover:cursor-pointer transition-colors"
 					>
 						{isDark ? <Moon size={20} /> : <Sun size={20} />}
 						<span className="sr-only">Toggle theme</span>
-					</Button>
+					</button>
 				</TooltipTrigger>
 				<TooltipContent side="bottom">
 					<p>{isDark ? "Dark mode" : "Light mode"}</p>

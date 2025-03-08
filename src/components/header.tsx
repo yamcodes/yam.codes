@@ -39,7 +39,7 @@ export default function Header() {
 									href="https://github.com/yamcodes"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-muted-foreground hover:text-primary transition-colors"
+									className="text-muted-foreground hover:text-foreground transition-colors"
 								>
 									<GitHub size={20} />
 									<span className="sr-only">GitHub</span>
@@ -56,7 +56,7 @@ export default function Header() {
 									href="https://mastodon.social/@yamcodes"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-muted-foreground hover:text-primary transition-colors"
+									className="text-muted-foreground hover:text-foreground transition-colors"
 								>
 									<Mastodon size={20} />
 									<span className="sr-only">Mastodon</span>
@@ -73,7 +73,7 @@ export default function Header() {
 									href="https://linkedin.com/in/yamyam263"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-muted-foreground hover:text-primary transition-colors"
+									className="text-muted-foreground hover:text-foreground transition-colors"
 								>
 									<Linkedin size={20} />
 									<span className="sr-only">LinkedIn</span>
