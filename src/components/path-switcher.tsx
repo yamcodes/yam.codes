@@ -35,7 +35,12 @@ function PathSwitcherItem({
 			asChild
 			className={cn("gap-2 p-2", currentPath === path.path && "bg-accent/60")}
 		>
-			<Link href={path.path}>
+			<Link
+				href={path.path}
+				{...(isExternalLink
+					? { target: "_blank", rel: "noopener noreferrer" }
+					: {})}
+			>
 				<div className="flex flex-col">
 					<div className="flex items-center gap-1">
 						<span
