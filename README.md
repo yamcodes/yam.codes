@@ -3,9 +3,7 @@
 
 <b>my personal website</b>
 
-![Typescript](https://img.shields.io/badge/TypeScript-007ACC?&logo=typescript&logoColor=white)
-![GitHub](https://img.shields.io/github/license/satnaing/astro-paper?color=%232F3741)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
+![Typescript](https://img.shields.io/badge/TypeScript-007ACC?&logo=typescript&logoColor=white) ![GitHub](https://img.shields.io/github/license/satnaing/astro-paper?color=%232F3741) ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/yamcodes/yam.codes?labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit%20Reviews)
 
 ---
 
