@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDown, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -19,6 +19,54 @@ interface PathItem {
 	name: string;
 	path: string;
 	description?: string;
+}
+
+function PathSwitcherItem({
+	path,
+	currentPath,
+}: {
+	path: PathItem;
+	currentPath: string;
+}) {
+	const isExternalLink = path.path.startsWith('http');
+
+	return (
+		<DropdownMenuItem
+			asChild
+			className={cn(
+				"gap-2 p-2",
+				currentPath === path.path && "bg-accent/60",
+			)}
+		>
+			<Link href={path.path}>
+				<div className="flex flex-col">
+					<div className="flex items-center gap-1">
+						<span
+							className={cn(
+								"font-semibold",
+								currentPath === path.path && "text-accent-foreground",
+							)}
+						>
+							{path.name}
+						</span>
+						{isExternalLink && (
+							<ExternalLink className="h-3 w-3 text-muted-foreground" />
+						)}
+					</div>
+					{path.description && (
+						<span
+							className={cn(
+								"text-xs text-muted-foreground",
+								currentPath === path.path && "text-accent-foreground/80",
+							)}
+						>
+							{path.description}
+						</span>
+					)}
+				</div>
+			</Link>
+		</DropdownMenuItem>
+	);
 }
 
 type PathSwitcherProps = {
@@ -63,38 +111,21 @@ export function PathSwitcher({ title }: PathSwitcherProps = {}) {
 					</>
 				)}
 				{paths.map((path) => (
-					<DropdownMenuItem
+					<PathSwitcherItem
 						key={path.path}
-						asChild
-						className={cn(
-							"gap-2 p-2",
-							pathname === path.path && "bg-accent/60",
-						)}
-					>
-						<Link href={path.path}>
-							<div className="flex flex-col">
-								<span
-									className={cn(
-										"font-semibold",
-										pathname === path.path && "text-accent-foreground",
-									)}
-								>
-									{path.name}
-								</span>
-								{path.description && (
-									<span
-										className={cn(
-											"text-xs text-muted-foreground",
-											pathname === path.path && "text-accent-foreground/80",
-										)}
-									>
-										{path.description}
-									</span>
-								)}
-							</div>
-						</Link>
-					</DropdownMenuItem>
+						path={path}
+						currentPath={pathname}
+					/>
 				))}
+        <PathSwitcherItem
+          key="my-key"
+          path={{
+            name: "/ark.env",
+            path: "https://yam.codes/ark.env",
+            description: "⛵ Typesafe environment variables powered by ArkType",
+          }}
+          currentPath={pathname}
+        />
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
