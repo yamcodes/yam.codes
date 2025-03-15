@@ -28,7 +28,7 @@
 	},
 	{
 		"title": "Bedstack",
-		"description": "RealWorld example app for Bun + ElysiaJS + DrizzleORM, the stack you don't want to sleep on 🛌💤",
+		"description": "RealWorld example app for Bun + ElysiaJS + Drizzle, the stack you don't want to sleep on 🛌💤",
 		"tags": ["typescript", "web server", "backend", "drizzle", "bun", "elysiajs", "realworld", "realworld-backend"],
 		"links": {
 			"docs": "https://agnyz.github.io/bedstack",
