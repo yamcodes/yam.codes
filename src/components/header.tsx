@@ -60,7 +60,9 @@ export default function Header() {
 					</Button>
 					<PathSwitcher />
 				</div>
-
+				<a rel="me" href="https://mastodon.social/@yamcodes" className="hidden">
+					Mastodon
+				</a>
 				<div className="flex items-center space-x-6">
 					<TooltipProvider>
 						<SocialLink
