@@ -45,7 +45,7 @@ export function ModeToggle() {
 					</button>
 				</TooltipTrigger>
 				<TooltipContent side="bottom">
-					<p>{isDark ? "Dark mode" : "Light mode"}</p>
+					<p>Toggle light/dark mode</p>
 				</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>
