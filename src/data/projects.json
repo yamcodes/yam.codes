@@ -1,5 +1,24 @@
 [
 	{
+		"title": "Bedstack",
+		"description": "RealWorld example app for Bun + ElysiaJS + Drizzle, the stack you don't want to sleep on 🛌💤",
+		"tags": [
+			"typescript",
+			"web",
+			"server",
+			"backend",
+			"drizzle",
+			"bun",
+			"elysiajs",
+			"realworld",
+			"realworld-backend"
+		],
+		"links": {
+			"docs": "https://bedstack.js.org",
+			"github": "https://github.com/agnyz/bedstack"
+		}
+	},
+	{
 		"title": "ark.env",
 		"description": "⛵ Typesafe environment variables powered by ArkType",
 		"tags": ["nodejs", "typescript", "environment-variables", "arktype"],
@@ -24,25 +43,6 @@
 		"links": {
 			"live": "https://yam.codes",
 			"github": "https://github.com/yamcodes/yam.codes"
-		}
-	},
-	{
-		"title": "Bedstack",
-		"description": "RealWorld example app for Bun + ElysiaJS + Drizzle, the stack you don't want to sleep on 🛌💤",
-		"tags": [
-			"typescript",
-			"web",
-			"server",
-			"backend",
-			"drizzle",
-			"bun",
-			"elysiajs",
-			"realworld",
-			"realworld-backend"
-		],
-		"links": {
-			"docs": "https://bedstack.js.org",
-			"github": "https://github.com/agnyz/bedstack"
 		}
 	}
 ]
