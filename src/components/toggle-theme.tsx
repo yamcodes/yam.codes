@@ -12,7 +12,7 @@ import {
 	TooltipTrigger,
 } from "~/components/ui/tooltip";
 
-export function ThemeToggle() {
+export function ToggleTheme() {
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 

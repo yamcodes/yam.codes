@@ -10,7 +10,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ReactElement, cloneElement } from "react";
 import { PathSwitcher } from "~/components/path-switcher";
-import { ThemeToggle } from "~/components/theme-toggle";
+import { ToggleTheme } from "~/components/toggle-theme";
 import {
 	Tooltip,
 	TooltipContent,
@@ -93,7 +93,7 @@ export default function Header() {
 							icon={<Linkedin size={24} />}
 							label="LinkedIn"
 						/>
-						<ThemeToggle />
+						<ToggleTheme />
 					</TooltipProvider>
 				</div>
 			</div>
