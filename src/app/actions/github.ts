@@ -1,9 +1,11 @@
 "use server";
 
+import { GraphQLClient, gql } from "graphql-request";
 import {
 	GitHubAPIError,
+	NotFoundError,
 	RateLimitError,
-	handleGitHubError,
+	logError,
 } from "~/lib/error-handling";
 
 interface GitHubRepo {
@@ -26,7 +28,36 @@ interface Project {
 	};
 }
 
-const makeRequest = async (url: string, useToken = true, body?: unknown) => {
+interface PinnedReposResponse {
+	user: {
+		pinnedItems: {
+			nodes: Array<{
+				name: string;
+				owner: {
+					login: string;
+				};
+			}>;
+		};
+	};
+}
+
+interface RepositoryResponse {
+	repository: {
+		name: string;
+		description: string | null;
+		url: string;
+		homepageUrl: string | null;
+		topics: {
+			nodes: Array<{
+				topic: {
+					name: string;
+				};
+			}>;
+		};
+	};
+}
+
+const createGitHubClient = (useToken = true) => {
 	const headers: Record<string, string> = {
 		Accept: "application/vnd.github+json",
 		"X-GitHub-Api-Version": "2022-11-28",
@@ -37,87 +68,70 @@ const makeRequest = async (url: string, useToken = true, body?: unknown) => {
 		headers.Authorization = `Bearer ${process.env.GITHUB_SCOPELESS_TOKEN}`;
 	}
 
-	if (body) {
-		headers["Content-Type"] = "application/json";
-	}
-
-	const options: RequestInit = {
-		headers,
-	};
-
-	if (body) {
-		options.method = "POST";
-		options.body = JSON.stringify(body);
-	}
-
-	try {
-		const res = await fetch(url, options);
-
-		if (res.status === 403) {
-			// rate limit reached, retry without token
-			if (useToken) {
-				return makeRequest(url, false, body);
-			}
-
-			throw new RateLimitError();
-		}
-
-		if (!res.ok) {
-			const errorText = await res.text();
-			throw new GitHubAPIError(
-				`GitHub API failed: ${res.status} ${res.statusText}`,
-				{ response: errorText },
-			);
-		}
-
-		return res;
-	} catch (error) {
-		throw handleGitHubError(error, { url, method: body ? "POST" : "GET" });
-	}
+	return new GraphQLClient("https://api.github.com/graphql", { headers });
 };
 
-const fetchPinnedRepos = async (): Promise<
-	{ name: string; owner: string }[]
-> => {
-	const query = `
-		query {
-			user(login: "yamcodes") {
-				pinnedItems(first: 6, types: REPOSITORY) {
-					nodes {
-						... on Repository {
-							name
-							owner {
-								login
-							}
+const PINNED_REPOS_QUERY = gql`
+	query PinnedRepos {
+		user(login: "yamcodes") {
+			pinnedItems(first: 6, types: [REPOSITORY]) {
+				nodes {
+					... on Repository {
+						name
+						owner {
+							login
 						}
 					}
 				}
 			}
 		}
-	`;
+	}
+`;
 
+const REPO_QUERY = gql`
+	query GetRepo($owner: String!, $name: String!) {
+		repository(owner: $owner, name: $name) {
+			name
+			description
+			url
+			homepageUrl
+			topics: repositoryTopics(first: 10) {
+				nodes {
+					topic {
+						name
+					}
+				}
+			}
+		}
+	}
+`;
+
+const fetchPinnedRepos = async (): Promise<
+	{ name: string; owner: string }[]
+> => {
 	try {
-		const response = await makeRequest("https://api.github.com/graphql", true, {
-			query,
-		}).then((res) => res.json());
+		const client = createGitHubClient();
+		const response =
+			await client.request<PinnedReposResponse>(PINNED_REPOS_QUERY);
 
-		if (!response?.data?.user?.pinnedItems?.nodes) {
-			throw new GitHubAPIError(
+		if (!response?.user?.pinnedItems?.nodes) {
+			const error = new GitHubAPIError(
 				"Invalid response format from GitHub GraphQL API",
-				{
-					response,
-				},
+				{ response },
 			);
+			logError(error, { operation: "fetchPinnedRepos" });
+			throw error;
 		}
 
-		return response.data.user.pinnedItems.nodes.map(
-			(node: { name: string; owner: { login: string } }) => ({
-				name: node.name,
-				owner: node.owner.login,
-			}),
-		);
+		return response.user.pinnedItems.nodes.map((node) => ({
+			name: node.name,
+			owner: node.owner.login,
+		}));
 	} catch (error) {
-		throw handleGitHubError(error, { operation: "fetchPinnedRepos" });
+		if (error instanceof Error) {
+			logError(error, { operation: "fetchPinnedRepos" });
+		}
+		throw error;
 	}
 };
 
@@ -130,15 +144,44 @@ export const fetchProjects = async (): Promise<Project[]> => {
 		const repos = await Promise.all(
 			pinnedRepos.map(async ({ name, owner }) => {
 				try {
-					const response = await makeRequest(
-						`https://api.github.com/repos/${owner}/${name}`,
+					const client = createGitHubClient();
+					const response = await client.request<RepositoryResponse>(
+						REPO_QUERY,
+						{
+							owner,
+							name,
+						},
 					);
-					return response.json();
+
+					if (!response?.repository) {
+						const error = new NotFoundError(
+							`Repository not found: ${owner}/${name}`,
+						);
+						logError(error, {
+							operation: "fetchRepository",
+							repository: `${owner}/${name}`,
+						});
+						throw error;
+					}
+
+					return {
+						name: response.repository.name,
+						description: response.repository.description,
+						html_url: response.repository.url,
+						topics: response.repository.topics.nodes.map(
+							(node) => node.topic.name,
+						),
+						homepage: response.repository.homepageUrl,
+						fork: false, // We don't need this for pinned repos
+					};
 				} catch (error) {
-					throw handleGitHubError(error, {
-						operation: "fetchRepository",
-						repository: `${owner}/${name}`,
-					});
+					if (error instanceof Error) {
+						logError(error, {
+							operation: "fetchRepository",
+							repository: `${owner}/${name}`,
+						});
+					}
+					throw error;
 				}
 			}),
 		);
@@ -158,6 +201,9 @@ export const fetchProjects = async (): Promise<Project[]> => {
 
 		return projects;
 	} catch (error) {
-		throw handleGitHubError(error, { operation: "fetchProjects" });
+		if (error instanceof Error) {
+			logError(error, { operation: "fetchProjects" });
+		}
+		throw error;
 	}
 };
