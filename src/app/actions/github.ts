@@ -1,5 +1,12 @@
 "use server";
 
+import { GraphQLClient } from "graphql-request";
+import {
+	GitHubAPIError,
+	RateLimitError,
+	handleGitHubError,
+} from "~/lib/error-handling";
+
 interface GitHubRepo {
 	name: string;
 	description: string | null;
@@ -17,6 +24,19 @@ interface Project {
 		github?: string;
 		live?: string;
 		docs?: string;
+	};
+}
+
+interface PinnedReposResponse {
+	user: {
+		pinnedItems: {
+			nodes: Array<{
+				name: string;
+				owner: {
+					login: string;
+				};
+			}>;
+		};
 	};
 }
 
@@ -44,76 +64,80 @@ const makeRequest = async (url: string, useToken = true, body?: unknown) => {
 		options.body = JSON.stringify(body);
 	}
 
-	const res = await fetch(url, options);
+	try {
+		const res = await fetch(url, options);
 
-	if (res.status === 403) {
-		// rate limit reached, retry without token
-		if (useToken) {
-			return makeRequest(url, false, body);
+		if (res.status === 403) {
+			// rate limit reached, retry without token
+			if (useToken) {
+				return makeRequest(url, false, body);
+			}
+
+			throw new RateLimitError();
 		}
 
-		throw new Error(
-			"Rate limit reached for both authenticated and unauthenticated requests",
-		);
-	}
+		if (!res.ok) {
+			const errorText = await res.text();
+			throw new GitHubAPIError(
+				`GitHub API failed: ${res.status} ${res.statusText}`,
+				{ response: errorText },
+			);
+		}
 
-	if (!res.ok) {
-		const errorText = await res.text();
-		throw new Error(
-			`GitHub API failed: ${res.status} ${res.statusText} - ${errorText}`,
-		);
+		return res;
+	} catch (error) {
+		throw handleGitHubError(error, { url, method: body ? "POST" : "GET" });
 	}
-
-	return res;
 };
 
 const fetchPinnedRepos = async (): Promise<
 	{ name: string; owner: string }[]
 > => {
-	const query = `
-		query {
-			user(login: "yamcodes") {
-				pinnedItems(first: 6, types: REPOSITORY) {
-					nodes {
-						... on Repository {
-							name
-							owner {
-								login
+	try {
+		const client = new GraphQLClient("https://api.github.com/graphql", {
+			headers: {
+				Authorization: process.env.GITHUB_SCOPELESS_TOKEN
+					? `Bearer ${process.env.GITHUB_SCOPELESS_TOKEN}`
+					: "",
+				"X-GitHub-Api-Version": "2022-11-28",
+				"User-Agent": "yam.codes",
+			},
+		});
+
+		const query = `
+			query PinnedRepos {
+				user(login: "yamcodes") {
+					pinnedItems(first: 6, types: [REPOSITORY]) {
+						nodes {
+							... on Repository {
+								name
+								owner {
+									login
+								}
 							}
 						}
 					}
 				}
 			}
-		}
-	`;
+		`;
 
-	try {
-		const response = await makeRequest("https://api.github.com/graphql", true, {
-			query,
-		}).then((res) => res.json());
+		const response = await client.request<PinnedReposResponse>(query);
 
-		console.log(
-			"[GitHub API] GraphQL Response:",
-			JSON.stringify(response, null, 2),
-		);
-
-		if (!response?.data?.user?.pinnedItems?.nodes) {
-			console.error("[GitHub API] Invalid response format:", response);
-			throw new Error("Invalid response format from GitHub GraphQL API");
+		if (!response?.user?.pinnedItems?.nodes) {
+			throw new GitHubAPIError(
+				"Invalid response format from GitHub GraphQL API",
+				{
+					response,
+				},
+			);
 		}
 
-		return response.data.user.pinnedItems.nodes.map(
-			(node: { name: string; owner: { login: string } }) => ({
-				name: node.name,
-				owner: node.owner.login,
-			}),
-		);
+		return response.user.pinnedItems.nodes.map((node) => ({
+			name: node.name,
+			owner: node.owner.login,
+		}));
 	} catch (error) {
-		console.error("[GitHub API Error] Failed to fetch pinned repositories:", {
-			error: error instanceof Error ? error.message : "Unknown error",
-			timestamp: new Date().toISOString(),
-		});
-		return [];
+		throw handleGitHubError(error, { operation: "fetchPinnedRepos" });
 	}
 };
 
@@ -121,7 +145,6 @@ export const fetchProjects = async (): Promise<Project[]> => {
 	try {
 		// First get the list of pinned repositories
 		const pinnedRepos = await fetchPinnedRepos();
-		console.log("[GitHub API] Pinned repositories:", pinnedRepos);
 
 		// Then fetch full repository data for each pinned repo
 		const repos = await Promise.all(
@@ -132,14 +155,10 @@ export const fetchProjects = async (): Promise<Project[]> => {
 					);
 					return response.json();
 				} catch (error) {
-					console.error(
-						`[GitHub API Error] Failed to fetch repository ${owner}/${name}:`,
-						{
-							error: error instanceof Error ? error.message : "Unknown error",
-							timestamp: new Date().toISOString(),
-						},
-					);
-					return null;
+					throw handleGitHubError(error, {
+						operation: "fetchRepository",
+						repository: `${owner}/${name}`,
+					});
 				}
 			}),
 		);
@@ -159,12 +178,6 @@ export const fetchProjects = async (): Promise<Project[]> => {
 
 		return projects;
 	} catch (error) {
-		console.error("[GitHub API Error] Failed to fetch repositories:", {
-			error: error instanceof Error ? error.message : "Unknown error",
-			timestamp: new Date().toISOString(),
-		});
-
-		// Return empty array on error to prevent page from breaking
-		return [];
+		throw handleGitHubError(error, { operation: "fetchProjects" });
 	}
 };
