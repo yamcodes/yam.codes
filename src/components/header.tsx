@@ -9,8 +9,8 @@ import { Linkedin } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ReactElement, cloneElement } from "react";
-import { ModeToggle } from "~/components/mode-toggle";
 import { PathSwitcher } from "~/components/path-switcher";
+import { ThemeToggle } from "~/components/theme-toggle";
 import {
 	Tooltip,
 	TooltipContent,
@@ -93,7 +93,7 @@ export default function Header() {
 							icon={<Linkedin size={24} />}
 							label="LinkedIn"
 						/>
-						<ModeToggle />
+						<ThemeToggle />
 					</TooltipProvider>
 				</div>
 			</div>

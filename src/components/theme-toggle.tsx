@@ -12,7 +12,7 @@ import {
 	TooltipTrigger,
 } from "~/components/ui/tooltip";
 
-export function ModeToggle() {
+export function ThemeToggle() {
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 
@@ -45,7 +45,7 @@ export function ModeToggle() {
 				</Button>
 			</TooltipTrigger>
 			<TooltipContent side="bottom">
-				<p>Toggle light/dark mode</p>
+				<p>Toggle theme</p>
 			</TooltipContent>
 		</Tooltip>
 	);
