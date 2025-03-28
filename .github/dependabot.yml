@@ -6,26 +6,26 @@
 version: 2
 updates:
   # pnpm updates
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: npm
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     groups:
       pnpm:
         patterns:
           - "*"
         update-types:
-          - "minor"
-          - "patch"
+          - minor
+          - patch
   # GitHub Actions updates
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     groups:
       actions:
         patterns:
           - "*"
         update-types:
-          - "minor"
-          - "patch"
+          - minor
+          - patch
