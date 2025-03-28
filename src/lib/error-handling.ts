@@ -66,7 +66,6 @@ export const logError = (
 		process.stdout.write(`${JSON.stringify(logEntry)}\n`);
 	}
 };
-
 // Helper to handle GitHub API errors
 export const handleGitHubError = (
 	error: unknown,

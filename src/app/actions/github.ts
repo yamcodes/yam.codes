@@ -1,6 +1,5 @@
 "use server";
 
-import { GraphQLClient } from "graphql-request";
 import {
 	GitHubAPIError,
 	RateLimitError,
@@ -24,19 +23,6 @@ interface Project {
 		github?: string;
 		live?: string;
 		docs?: string;
-	};
-}
-
-interface PinnedReposResponse {
-	user: {
-		pinnedItems: {
-			nodes: Array<{
-				name: string;
-				owner: {
-					login: string;
-				};
-			}>;
-		};
 	};
 }
 
@@ -93,37 +79,29 @@ const makeRequest = async (url: string, useToken = true, body?: unknown) => {
 const fetchPinnedRepos = async (): Promise<
 	{ name: string; owner: string }[]
 > => {
-	try {
-		const client = new GraphQLClient("https://api.github.com/graphql", {
-			headers: {
-				Authorization: process.env.GITHUB_SCOPELESS_TOKEN
-					? `Bearer ${process.env.GITHUB_SCOPELESS_TOKEN}`
-					: "",
-				"X-GitHub-Api-Version": "2022-11-28",
-				"User-Agent": "yam.codes",
-			},
-		});
-
-		const query = `
-			query PinnedRepos {
-				user(login: "yamcodes") {
-					pinnedItems(first: 6, types: [REPOSITORY]) {
-						nodes {
-							... on Repository {
-								name
-								owner {
-									login
-								}
+	const query = `
+		query {
+			user(login: "yamcodes") {
+				pinnedItems(first: 6, types: REPOSITORY) {
+					nodes {
+						... on Repository {
+							name
+							owner {
+								login
 							}
 						}
 					}
 				}
 			}
-		`;
+		}
+	`;
 
-		const response = await client.request<PinnedReposResponse>(query);
+	try {
+		const response = await makeRequest("https://api.github.com/graphql", true, {
+			query,
+		}).then((res) => res.json());
 
-		if (!response?.user?.pinnedItems?.nodes) {
+		if (!response?.data?.user?.pinnedItems?.nodes) {
 			throw new GitHubAPIError(
 				"Invalid response format from GitHub GraphQL API",
 				{
@@ -132,10 +110,12 @@ const fetchPinnedRepos = async (): Promise<
 			);
 		}
 
-		return response.user.pinnedItems.nodes.map((node) => ({
-			name: node.name,
-			owner: node.owner.login,
-		}));
+		return response.data.user.pinnedItems.nodes.map(
+			(node: { name: string; owner: { login: string } }) => ({
+				name: node.name,
+				owner: node.owner.login,
+			}),
+		);
 	} catch (error) {
 		throw handleGitHubError(error, { operation: "fetchPinnedRepos" });
 	}
