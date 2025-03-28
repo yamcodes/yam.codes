@@ -67,7 +67,9 @@ const makeRequest = async (url: string, useToken = true, body?: unknown) => {
 	return res;
 };
 
-const fetchPinnedRepos = async (): Promise<string[]> => {
+const fetchPinnedRepos = async (): Promise<
+	{ name: string; owner: string }[]
+> => {
 	const query = `
 		query {
 			user(login: "yamcodes") {
@@ -75,6 +77,9 @@ const fetchPinnedRepos = async (): Promise<string[]> => {
 					nodes {
 						... on Repository {
 							name
+							owner {
+								login
+							}
 						}
 					}
 				}
@@ -98,7 +103,10 @@ const fetchPinnedRepos = async (): Promise<string[]> => {
 		}
 
 		return response.data.user.pinnedItems.nodes.map(
-			(node: { name: string }) => node.name,
+			(node: { name: string; owner: { login: string } }) => ({
+				name: node.name,
+				owner: node.owner.login,
+			}),
 		);
 	} catch (error) {
 		console.error("[GitHub API Error] Failed to fetch pinned repositories:", {
@@ -117,15 +125,15 @@ export const fetchProjects = async (): Promise<Project[]> => {
 
 		// Then fetch full repository data for each pinned repo
 		const repos = await Promise.all(
-			pinnedRepos.map(async (name) => {
+			pinnedRepos.map(async ({ name, owner }) => {
 				try {
 					const response = await makeRequest(
-						`https://api.github.com/repos/yamcodes/${name}`,
+						`https://api.github.com/repos/${owner}/${name}`,
 					);
 					return response.json();
 				} catch (error) {
 					console.error(
-						`[GitHub API Error] Failed to fetch repository ${name}:`,
+						`[GitHub API Error] Failed to fetch repository ${owner}/${name}:`,
 						{
 							error: error instanceof Error ? error.message : "Unknown error",
 							timestamp: new Date().toISOString(),
