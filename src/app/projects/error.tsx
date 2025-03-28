@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { Button } from "~/components/ui/button";
+import { GitHubAPIError, RateLimitError } from "~/lib/error-handling";
 
 export default function ProjectsError({
 	error,
@@ -18,7 +19,7 @@ export default function ProjectsError({
 	// Handle expected errors (like API failures) with specific messages
 	const errorMessage =
 		error instanceof Error
-			? error.name === "GitHubAPIError" || error.name === "RateLimitError"
+			? error instanceof GitHubAPIError || error instanceof RateLimitError
 				? "Failed to fetch projects from GitHub. Please try again later."
 				: error.message
 			: "An unexpected error occurred";
