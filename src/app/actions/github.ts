@@ -4,8 +4,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import {
 	GitHubAPIError,
 	NotFoundError,
-	RateLimitError,
-	logError,
+	handleGitHubError,
 } from "~/lib/error-handling";
 
 interface GitHubRepo {
@@ -115,12 +114,10 @@ const fetchPinnedRepos = async (): Promise<
 			await client.request<PinnedReposResponse>(PINNED_REPOS_QUERY);
 
 		if (!response?.user?.pinnedItems?.nodes) {
-			const error = new GitHubAPIError(
+			throw new GitHubAPIError(
 				"Invalid response format from GitHub GraphQL API",
 				{ response },
 			);
-			logError(error, { operation: "fetchPinnedRepos" });
-			throw error;
 		}
 
 		return response.user.pinnedItems.nodes.map((node) => ({
@@ -128,10 +125,7 @@ const fetchPinnedRepos = async (): Promise<
 			owner: node.owner.login,
 		}));
 	} catch (error) {
-		if (error instanceof Error) {
-			logError(error, { operation: "fetchPinnedRepos" });
-		}
-		throw error;
+		throw handleGitHubError(error, { operation: "fetchPinnedRepos" });
 	}
 };
 
@@ -154,14 +148,7 @@ export const fetchProjects = async (): Promise<Project[]> => {
 					);
 
 					if (!response?.repository) {
-						const error = new NotFoundError(
-							`Repository not found: ${owner}/${name}`,
-						);
-						logError(error, {
-							operation: "fetchRepository",
-							repository: `${owner}/${name}`,
-						});
-						throw error;
+						throw new NotFoundError(`Repository not found: ${owner}/${name}`);
 					}
 
 					return {
@@ -175,13 +162,10 @@ export const fetchProjects = async (): Promise<Project[]> => {
 						fork: false, // We don't need this for pinned repos
 					};
 				} catch (error) {
-					if (error instanceof Error) {
-						logError(error, {
-							operation: "fetchRepository",
-							repository: `${owner}/${name}`,
-						});
-					}
-					throw error;
+					throw handleGitHubError(error, {
+						operation: "fetchRepository",
+						repository: `${owner}/${name}`,
+					});
 				}
 			}),
 		);
@@ -201,9 +185,6 @@ export const fetchProjects = async (): Promise<Project[]> => {
 
 		return projects;
 	} catch (error) {
-		if (error instanceof Error) {
-			logError(error, { operation: "fetchProjects" });
-		}
-		throw error;
+		throw handleGitHubError(error, { operation: "fetchProjects" });
 	}
 };
