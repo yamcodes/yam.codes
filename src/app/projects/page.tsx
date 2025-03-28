@@ -1,6 +1,5 @@
+import { fetchProjects } from "~/app/actions/github";
 import { ProjectCard } from "~/components/project-card";
-
-import projects from "~/data/projects.json";
 
 const idify = (text: string) => {
 	return text
@@ -10,7 +9,9 @@ const idify = (text: string) => {
 		.replace(/^-+|-+$/g, ""); // trailing and leading dashes
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+	const projects = await fetchProjects();
+
 	return (
 		<div className="space-y-8">
 			<div className="space-y-4">
