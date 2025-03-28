@@ -32,22 +32,20 @@ export function ModeToggle() {
 	const isDark = theme === "dark";
 
 	return (
-		<TooltipProvider>
-			<Tooltip>
-				<TooltipTrigger asChild>
-					<button
-						type="button"
-						onClick={() => setTheme(isDark ? "light" : "dark")}
-						className="text-muted-foreground hover:text-foreground hover:cursor-pointer transition-colors"
-					>
-						{isDark ? <Moon size={20} /> : <Sun size={20} />}
-						<span className="sr-only">Toggle theme</span>
-					</button>
-				</TooltipTrigger>
-				<TooltipContent side="bottom">
-					<p>Toggle light/dark mode</p>
-				</TooltipContent>
-			</Tooltip>
-		</TooltipProvider>
+		<Tooltip>
+			<TooltipTrigger asChild>
+				<button
+					type="button"
+					onClick={() => setTheme(isDark ? "light" : "dark")}
+					className="text-muted-foreground hover:text-foreground hover:cursor-pointer transition-colors"
+				>
+					{isDark ? <Moon size={20} /> : <Sun size={20} />}
+					<span className="sr-only">Toggle theme</span>
+				</button>
+			</TooltipTrigger>
+			<TooltipContent side="bottom">
+				<p>Toggle light/dark mode</p>
+			</TooltipContent>
+		</Tooltip>
 	);
 }

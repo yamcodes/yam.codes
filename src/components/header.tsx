@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { Linkedin } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { type ReactElement, cloneElement } from "react";
 import { ModeToggle } from "~/components/mode-toggle";
 import { PathSwitcher } from "~/components/path-switcher";
 import {
@@ -32,9 +33,12 @@ function SocialLink({ href, icon, label }: SocialLinkProps) {
 					href={href}
 					target="_blank"
 					rel="noopener noreferrer"
+					aria-label={label}
 					className="text-muted-foreground hover:text-foreground transition-colors"
 				>
-					{icon}
+					{cloneElement(icon as ReactElement<{ title?: string }>, {
+						title: "",
+					})}
 					<span className="sr-only">{label}</span>
 				</a>
 			</TooltipTrigger>
@@ -80,8 +84,8 @@ export default function Header() {
 							icon={<Linkedin size={20} />}
 							label="LinkedIn"
 						/>
+						<ModeToggle />
 					</TooltipProvider>
-					<ModeToggle />
 				</div>
 			</div>
 		</header>
