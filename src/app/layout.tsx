@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist } from "next/font/google";
 import type React from "react";
 import "./globals.css";
 import Footer from "~/components/footer";
 import Header from "~/components/header";
 import { ThemeProvider } from "~/components/theme-provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "Yam Borodetsky · Software Engineer",
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={inter.className}>
+			<body className={geist.className}>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"

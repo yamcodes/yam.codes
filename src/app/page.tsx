@@ -10,20 +10,20 @@ import {
 
 export default function Home() {
 	return (
-		<div className="space-y-8">
+		<div className="prose prose-lg dark:prose-invert prose-zinc max-w-none">
 			<div className="space-y-4">
 				<div>
-					<h1 className="text-4xl font-bold tracking-tight">Yam Borodetsky</h1>
+					<h1 className="mb-2">Yam Borodetsky</h1>
 					<HoverCard>
 						<HoverCardTrigger asChild>
 							<Button
 								variant="link"
-								className="p-0 hover:decoration-dotted hover:cursor-help"
+								className="p-0 underline decoration-dotted hover:no-underline hover:cursor-help"
 							>
 								@yamcodes
 							</Button>
 						</HoverCardTrigger>
-						<HoverCardContent className="w-80">
+						<HoverCardContent className="w-80 not-prose">
 							<div className="flex justify-between space-x-4">
 								<Avatar>
 									<AvatarImage src="https://github.com/yamcodes.png" />
@@ -38,7 +38,7 @@ export default function Home() {
 									<div className="flex items-center pt-2">
 										<BriefcaseBusiness className="mr-2 h-4 w-4 opacity-70" />{" "}
 										<span className="text-xs text-muted-foreground">
-											Full-Stack Developer at Zynga
+											Tech Lead at Zynga
 										</span>
 									</div>
 								</div>
@@ -46,35 +46,35 @@ export default function Home() {
 						</HoverCardContent>
 					</HoverCard>
 				</div>
-				<p className="text-l text-muted-foreground">
+				<p className="lead">
 					Full-time Software Engineer · Part-time Open Sourcerer
 				</p>
 			</div>
 
-			<div className="space-y-6 text-lg">
+			<div>
 				<p>
-					I'm a passionate full-stack developer with over 4 years of
-					professional experience. My expertise spans across the entire
-					development stack, from crafting intuitive user interfaces to
-					designing robust cloud systems.
+					I'm a passionate Software Engineer specializing in full-stack web
+					development. With over 4 years of professional experience, I've built
+					core libraries, designed cloud systems, and developed a proven track
+					record of solving tough problems with clean, maintainable code.
 				</p>
-
 				<p>
-					Currently, I'm working as a full-stack developer at Zynga, where I
-					lead the engineering of scalable platform solutions. Every day I
-					tackle challenges using TypeScript, React, Node.js, NestJS, Firebase
-					and Google Cloud.
+					Right now, I'm a Tech Lead at Zynga, leading the{" "}
+					<a href="https://themavens.com/">mavens</a> platform engineering team.
+					I focus on designing scalable internal systems and guiding our
+					architecture across tools, services, and infrastructure built with
+					TypeScript, React, Node.js, NestJS, Firebase, and Google Cloud.
 				</p>
-
 				<p>
-					After I'm done coding for a living, I still code. I contribute to
-					open-source projects, learn new technologies and build tools that
-					solve real-world problems. I believe in clean, maintainable code and
-					user-centered design principles.
+					Outside of work, I stay just as curious. I contribute to open source,
+					experiment with new tech, and build tools that make life easier for
+					developers. I care deeply about developer experience, user-first
+					design, and writing code I won't have to rewrite—or at least code that
+					the Yam of six months from now won't curse me for.
 				</p>
 			</div>
 
-			<div className="flex flex-col sm:flex-row gap-4 pt-4">
+			<div className="flex flex-col sm:flex-row gap-4 pt-4 not-prose">
 				<Button
 					asChild
 					size="xl"

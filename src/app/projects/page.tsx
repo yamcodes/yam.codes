@@ -13,15 +13,15 @@ export default async function ProjectsPage() {
 	const projects = await fetchProjects();
 
 	return (
-		<div className="space-y-8">
+		<div className="prose prose-lg dark:prose-invert prose-zinc max-w-none">
 			<div className="space-y-4">
-				<h1 className="text-4xl font-bold tracking-tight">Projects</h1>
-				<p className="text-xl text-muted-foreground">
+				<h2 className="mt-0">Projects</h2>
+				<p className="lead">
 					A selection of my recent work and open-source contributions
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
+			<div className="not-prose grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
 				{projects.map((project) => (
 					<ProjectCard key={idify(project.title)} project={project} />
 				))}
