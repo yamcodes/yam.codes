@@ -5,14 +5,16 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 import { Button } from "~/components/ui/button";
+import { DropdownMenuItem } from "~/components/ui/dropdown-menu";
 import {
 	Tooltip,
 	TooltipContent,
-	TooltipProvider,
 	TooltipTrigger,
 } from "~/components/ui/tooltip";
 
-export function ToggleTheme() {
+export function ToggleTheme({
+	forDropdown = false,
+}: { forDropdown?: boolean }) {
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 
@@ -30,6 +32,15 @@ export function ToggleTheme() {
 	}
 
 	const isDark = theme === "dark";
+
+	if (forDropdown) {
+		return (
+			<DropdownMenuItem onClick={() => setTheme(isDark ? "light" : "dark")}>
+				{isDark ? <Moon size={16} /> : <Sun size={16} />}
+				Toggle theme
+			</DropdownMenuItem>
+		);
+	}
 
 	return (
 		<Tooltip>
