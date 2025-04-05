@@ -46,9 +46,6 @@ export default function Home() {
 						</HoverCardContent>
 					</HoverCard>
 				</div>
-				<p className="lead">
-					Full-time Software Engineer · Part-time Open Sourcerer
-				</p>
 			</div>
 
 			<div>
