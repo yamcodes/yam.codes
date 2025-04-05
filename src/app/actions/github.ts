@@ -65,6 +65,10 @@ const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 let lastRequestTime = 0;
 const MIN_REQUEST_INTERVAL = 100; // Minimum 100ms between requests
 
+// Track failed requests for monitoring
+const failedRequests = new Map<string, number>();
+const MAX_FAILURES = 3;
+
 const createGitHubClient = (useToken = true) => {
 	const headers: Record<string, string> = {
 		Accept: "application/vnd.github+json",
@@ -177,6 +181,7 @@ const fetchPinnedRepos = async (): Promise<
 			owner: node.owner.login,
 		}));
 	} catch (error) {
+		console.error("Failed to fetch pinned repos:", error);
 		throw handleGitHubError(error, { operation: "fetchPinnedRepos" });
 	}
 };
@@ -214,6 +219,9 @@ const fetchRepository = async (
 		REPO_CACHE.set(cacheKey, response.repository);
 		setTimeout(() => REPO_CACHE.delete(cacheKey), CACHE_TTL);
 
+		// Reset failure count on success
+		failedRequests.delete(cacheKey);
+
 		return {
 			name: response.repository.name,
 			description: response.repository.description,
@@ -223,6 +231,23 @@ const fetchRepository = async (
 			fork: false,
 		};
 	} catch (error) {
+		// Track failures
+		const failures = (failedRequests.get(cacheKey) || 0) + 1;
+		failedRequests.set(cacheKey, failures);
+
+		console.error(
+			`Failed to fetch repository ${cacheKey} (attempt ${failures}):`,
+			error,
+		);
+
+		// If we've failed too many times, throw a more specific error
+		if (failures >= MAX_FAILURES) {
+			throw new GitHubAPIError(
+				`Failed to fetch repository ${cacheKey} after ${MAX_FAILURES} attempts`,
+				{ originalError: error, repository: cacheKey },
+			);
+		}
+
 		throw handleGitHubError(error, {
 			operation: "fetchRepository",
 			repository: cacheKey,
@@ -233,6 +258,11 @@ const fetchRepository = async (
 export const fetchProjects = async (): Promise<Project[]> => {
 	try {
 		const pinnedRepos = await fetchPinnedRepos();
+
+		if (!pinnedRepos.length) {
+			console.warn("No pinned repositories found");
+			return [];
+		}
 
 		// Fetch repositories sequentially to respect rate limits
 		const repos = [];
@@ -246,6 +276,14 @@ export const fetchProjects = async (): Promise<Project[]> => {
 			}
 		}
 
+		if (!repos.length) {
+			console.error("Failed to fetch any repositories");
+			throw new GitHubAPIError("Failed to fetch any repositories", {
+				pinnedRepos,
+				failedRequests: Array.from(failedRequests.entries()),
+			});
+		}
+
 		return repos.map((repo) => ({
 			title: repo.name,
 			description: repo.description || "No description available",
@@ -256,6 +294,7 @@ export const fetchProjects = async (): Promise<Project[]> => {
 			},
 		}));
 	} catch (error) {
+		console.error("Failed to fetch projects:", error);
 		throw handleGitHubError(error, { operation: "fetchProjects" });
 	}
 };

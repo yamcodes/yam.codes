@@ -12,6 +12,24 @@ const idify = (text: string) => {
 export default async function ProjectsPage() {
 	const projects = await fetchProjects();
 
+	if (!projects.length) {
+		return (
+			<div className="prose prose-lg dark:prose-invert prose-zinc max-w-none">
+				<div className="space-y-4">
+					<h2 className="mt-0">Projects</h2>
+					<p className="lead">
+						A selection of my recent work and open-source contributions
+					</p>
+				</div>
+				<div className="not-prose mt-6 p-6 rounded-lg border border-destructive/50 bg-destructive/10 text-center">
+					<p className="text-muted-foreground">
+						Unable to load projects at this time. Please try again later.
+					</p>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className="prose prose-lg dark:prose-invert prose-zinc max-w-none">
 			<div className="space-y-4">

@@ -9,8 +9,8 @@ const SKELETON_IDS = [
 
 export default function ProjectsLoading() {
 	return (
-		<div className="space-y-8">
-			<div className="space-y-4">
+		<div className="space-y-20">
+			<div className="space-y-9">
 				<Skeleton className="h-10 w-48" />
 				<Skeleton className="h-6 w-96" />
 			</div>
