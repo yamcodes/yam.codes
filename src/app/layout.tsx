@@ -12,6 +12,24 @@ export const metadata: Metadata = {
 	title: "Yam Borodetsky · Software Engineer",
 	description:
 		"Yam Borodetsky is a software engineer specializing in full-stack development",
+	icons: {
+		icon: [
+			{ url: "https://github.com/yamcodes.png", type: "image/png" },
+			{ url: "/favicon.ico" },
+		],
+		apple: [{ url: "https://github.com/yamcodes.png", type: "image/png" }],
+	},
+	openGraph: {
+		title: "Yam Borodetsky · Software Engineer",
+		description:
+			"Yam Borodetsky is a software engineer specializing in full-stack development",
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Yam Borodetsky · Software Engineer",
+		description:
+			"Yam Borodetsky is a software engineer specializing in full-stack development",
+	},
 };
 
 export default function RootLayout({
