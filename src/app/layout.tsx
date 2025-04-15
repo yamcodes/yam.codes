@@ -13,10 +13,7 @@ export const metadata: Metadata = {
 	description:
 		"Yam Borodetsky is a software engineer specializing in full-stack development",
 	icons: {
-		icon: [
-			{ url: "https://github.com/yamcodes.png", type: "image/png" },
-			{ url: "/favicon.ico" },
-		],
+		icon: [{ url: "https://github.com/yamcodes.png", type: "image/png" }],
 		apple: [{ url: "https://github.com/yamcodes.png", type: "image/png" }],
 	},
 	openGraph: {
