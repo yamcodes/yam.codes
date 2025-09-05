@@ -6,8 +6,7 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"ignoreUnknown": true,
-		"ignore": [".trunk"]
+		"ignoreUnknown": true
 	},
 	"formatter": {
 		"enabled": true,
