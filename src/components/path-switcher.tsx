@@ -124,15 +124,6 @@ export function PathSwitcher({ title }: PathSwitcherProps) {
 						currentPath={pathname}
 					/>
 				))}
-				<PathSwitcherItem
-					key="my-key"
-					path={{
-						name: "/arkenv",
-						path: "https://yam.codes/arkenv",
-						description: "⛵ Typesafe environment variables powered by ArkType",
-					}}
-					currentPath={pathname}
-				/>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
