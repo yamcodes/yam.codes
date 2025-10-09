@@ -8,7 +8,7 @@ import clsx from "clsx";
 import { Ellipsis, Linkedin } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type ReactElement, cloneElement } from "react";
+import { cloneElement, type ReactElement } from "react";
 import { PathSwitcher } from "~/components/path-switcher";
 import { ToggleTheme } from "~/components/toggle-theme";
 import {
