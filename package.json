@@ -23,7 +23,9 @@
 		"@sentry/nextjs": "^10",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
+		"graphql": "^16.11.0",
 		"graphql-request": "^7.2.0",
+		"import-in-the-middle": "^1.14.4",
 		"lucide-react": "^0.544.0",
 		"next": "15.5.3",
 		"next-themes": "^0.4.6",
@@ -53,6 +55,8 @@
 			"@sentry/cli",
 			"@tailwindcss/oxide"
 		],
-		"ignoredBuiltDependencies": ["sharp"]
+		"ignoredBuiltDependencies": [
+			"sharp"
+		]
 	}
 }
