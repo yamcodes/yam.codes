@@ -9,12 +9,20 @@ import { ThemeProvider } from "~/components/theme-provider";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://yam.codes"),
 	title: "Yam Borodetsky · Software Engineer",
 	description:
 		"Yam Borodetsky is a software engineer specializing in full-stack development",
 	icons: {
-		icon: [{ url: "https://github.com/yamcodes.png", type: "image/png" }],
-		apple: [{ url: "https://github.com/yamcodes.png", type: "image/png" }],
+		icon: [
+			{ url: "https://github.com/yamcodes.png", sizes: "16x16", type: "image/png" },
+			{ url: "https://github.com/yamcodes.png", sizes: "32x32", type: "image/png" },
+			{ url: "https://github.com/yamcodes.png", sizes: "192x192", type: "image/png" },
+		],
+		apple: [
+			{ url: "https://github.com/yamcodes.png", sizes: "180x180", type: "image/png" },
+		],
+		shortcut: { url: "https://github.com/yamcodes.png", type: "image/png" },
 	},
 	openGraph: {
 		title: "Yam Borodetsky · Software Engineer",
