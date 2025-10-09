@@ -35,7 +35,7 @@ Sentry.init({
 	dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 	enabled,
 
-	enableLogs: true,
+	enableLogs: !isProd,
 
 	environment: ENV, // "development" | "preview" | "production"
 
