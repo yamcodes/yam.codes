@@ -2,7 +2,7 @@
 
 import {
 	SiGithub as GitHub,
-	SiMastodon as Mastodon,
+	SiInstagram as Instagram,
 } from "@icons-pack/react-simple-icons";
 import clsx from "clsx";
 import { Ellipsis, Linkedin } from "lucide-react";
@@ -97,8 +97,12 @@ export default function Header() {
 					</Button>
 					<PathSwitcher />
 				</div>
-				<a rel="me" href="https://mastodon.social/@yamcodes" className="hidden">
-					Mastodon
+				<a
+					rel="me"
+					href="https://www.instagram.com/yam.codes/"
+					className="hidden"
+				>
+					Instagram
 				</a>
 				<div className="flex items-center space-x-1">
 					{/* Desktop */}
@@ -110,9 +114,9 @@ export default function Header() {
 								label="GitHub"
 							/>
 							<SocialLink
-								href="https://mastodon.social/@yamcodes"
-								icon={<Mastodon size={24} />}
-								label="Mastodon"
+								href="https://www.instagram.com/yam.codes/"
+								icon={<Instagram size={24} />}
+								label="Instagram"
 							/>
 							<SocialLink
 								href="https://linkedin.com/in/yamyam263"
@@ -144,9 +148,9 @@ export default function Header() {
 									forDropdown
 								/>
 								<SocialLink
-									href="https://mastodon.social/@yamcodes"
-									icon={<Mastodon size={16} />}
-									label="Mastodon"
+									href="https://www.instagram.com/yam.codes/"
+									icon={<Instagram size={16} />}
+									label="Instagram"
 									forDropdown
 								/>
 								<SocialLink
