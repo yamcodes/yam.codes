@@ -33,11 +33,11 @@ Sentry.init({
 	sendDefaultPii: true,
 
 	// Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
-	tracesSampleRate: 1,
+	tracesSampleRate: isProd ? 0.15 : isPreview ? 0.3 : 0,
 
 	// Enable logs to be sent to Sentry
-	enableLogs: true,
+	enableLogs: !isProd,
 
 	// Setting this option to true will print useful information to the console while you're setting up Sentry.
-	debug: false,
+	debug: Boolean(process.env.NEXT_PUBLIC_SENTRY_DEBUG) && !isProd,
 });
