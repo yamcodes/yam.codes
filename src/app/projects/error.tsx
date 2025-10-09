@@ -1,5 +1,6 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
 import { Button } from "~/components/ui/button";
 import { GitHubAPIError, RateLimitError } from "~/lib/error-handling";
@@ -12,8 +13,8 @@ export default function ProjectsError({
 	reset: () => void;
 }) {
 	useEffect(() => {
-		// Log the error to your error reporting service
-		console.error("Error in projects page:", error);
+		// Send error to Sentry for monitoring
+		Sentry.captureException(error);
 	}, [error]);
 
 	// Handle expected errors (like API failures) with specific messages
@@ -30,7 +31,7 @@ export default function ProjectsError({
 				Failed to load projects
 			</h2>
 			<p className="text-muted-foreground">{errorMessage}</p>
-			<Button variant="outline" onClick={reset} className="mt-4">
+			<Button variant="outline" onClick={() => reset()} className="mt-4">
 				Try again
 			</Button>
 		</div>
