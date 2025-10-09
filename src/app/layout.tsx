@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import type React from "react";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import Footer from "~/components/footer";
 import Header from "~/components/header";
 import { ThemeProvider } from "~/components/theme-provider";
@@ -78,6 +79,7 @@ export default function RootLayout({
 						<Footer />
 					</div>
 				</ThemeProvider>
+				<Analytics />
 			</body>
 		</html>
 	);
