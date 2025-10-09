@@ -2,15 +2,14 @@
 
 import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 import { Button } from "~/components/ui/button";
 
 function ErrorFallback({
 	error,
-	resetErrorBoundary,
+	reset,
 }: {
 	error: Error;
-	resetErrorBoundary: () => void;
+	reset: () => void;
 }) {
 	return (
 		<div className="flex min-h-[400px] flex-col items-center justify-center gap-4 rounded-lg border border-destructive/50 bg-destructive/10 p-8 text-center">
@@ -22,7 +21,7 @@ function ErrorFallback({
 					? error.message
 					: "An unexpected error occurred"}
 			</p>
-			<Button variant="outline" onClick={resetErrorBoundary} className="mt-4">
+			<Button variant="outline" onClick={() => reset()} className="mt-4">
 				Try again
 			</Button>
 		</div>
@@ -41,17 +40,5 @@ export default function ErrorPage({
 		Sentry.captureException(error);
 	}, [error]);
 
-	return (
-		<ErrorBoundary
-			FallbackComponent={ErrorFallback}
-			onReset={reset}
-			onError={(error) => {
-				// Send error to Sentry for monitoring
-				Sentry.captureException(error);
-				console.error("Error caught by error boundary:", error);
-			}}
-		>
-			{null}
-		</ErrorBoundary>
-	);
+	return <ErrorFallback error={error} reset={reset} />;
 }
