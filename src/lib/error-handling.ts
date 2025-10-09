@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/nextjs";
+
 export class AppError extends Error {
 	constructor(
 		message: string,
@@ -38,7 +40,34 @@ export const logError = (
 	error: Error,
 	context: Record<string, unknown> = {},
 ) => {
-	// In development, log to console with full details
+	// Add context to Sentry
+	Sentry.withScope((scope) => {
+		// Set the error level based on error type
+		if (error instanceof RateLimitError) {
+			scope.setLevel("warning");
+		} else if (error instanceof NotFoundError) {
+			scope.setLevel("info");
+		} else {
+			scope.setLevel("error");
+		}
+
+		// Add context as extra data
+		for (const [key, value] of Object.entries(context)) {
+			scope.setExtra(key, value);
+		}
+
+		// Add custom tags for better filtering in Sentry
+		if (error instanceof AppError) {
+			scope.setTag("error.code", error.code);
+			scope.setTag("error.statusCode", error.statusCode);
+			scope.setTag("error.type", error.name);
+		}
+
+		// Capture the error
+		Sentry.captureException(error);
+	});
+
+	// Also log to console in development
 	if (process.env.NODE_ENV === "development") {
 		console.error("[Error]", {
 			name: error.name,
@@ -47,23 +76,6 @@ export const logError = (
 			...context,
 			timestamp: new Date().toISOString(),
 		});
-	}
-
-	// In production, we'll integrate with Sentry later
-	// For now, we'll just log to the server logs
-	if (process.env.NODE_ENV === "production") {
-		// TODO: Integrate with Sentry
-		// For now, we'll use structured logging that can be easily parsed
-		const logEntry = {
-			level: "error",
-			name: error.name,
-			message: error.message,
-			...context,
-			timestamp: new Date().toISOString(),
-		};
-
-		// Log in a format that can be easily parsed by log aggregation tools
-		process.stdout.write(`${JSON.stringify(logEntry)}\n`);
 	}
 };
 // Helper to handle GitHub API errors
