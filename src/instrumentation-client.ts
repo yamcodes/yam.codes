@@ -1,34 +1,108 @@
-// This file configures the initialization of Sentry on the client.
-// The added config here will be used whenever a users loads a page in their browser.
-// https://docs.sentry.io/platforms/javascript/guides/nextjs/
-
+// instrumentation-client.ts
 import * as Sentry from "@sentry/nextjs";
+
+// Resolve environment consistently on the client
+const ENV =
+	process.env.NEXT_PUBLIC_VERCEL_ENV ||
+	process.env.VERCEL_ENV ||
+	process.env.NODE_ENV; // fallback
+
+const isDev = ENV === "development";
+const isPreview = ENV === "preview";
+const isProd = ENV === "production";
+
+// Optional manual kill-switch
+const explicitEnabled =
+	typeof process.env.NEXT_PUBLIC_SENTRY_ENABLED === "string"
+		? process.env.NEXT_PUBLIC_SENTRY_ENABLED === "true"
+		: undefined;
+
+// Enable only in preview/prod unless explicitly overridden
+const enabled = explicitEnabled ?? (isPreview || isProd);
+
+// Safer defaults from env with sensible fallbacks
+const tracesRateEnv = Number(
+	process.env.NEXT_PUBLIC_SENTRY_TRACES_SAMPLE_RATE_CLIENT,
+);
+const replaysSessionRateEnv = Number(
+	process.env.NEXT_PUBLIC_SENTRY_REPLAYS_SESSION_SAMPLE_RATE,
+);
+const replaysOnErrorRateEnv = Number(
+	process.env.NEXT_PUBLIC_SENTRY_REPLAYS_ON_ERROR_SAMPLE_RATE,
+);
 
 Sentry.init({
 	dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+	enabled,
+
+	enableLogs: true,
+
+	environment: ENV, // "development" | "preview" | "production"
+
+	// Keep console capture out of prod to reduce noise. Use it in preview for QA.
+	integrations: [
+		...(isPreview || (explicitEnabled && !isProd)
+			? [Sentry.captureConsoleIntegration()]
+			: []),
+		...(isProd || isPreview ? [Sentry.replayIntegration()] : []),
+	],
+
+	// Tracing: higher in preview for catch-rate, lower in prod by default
+	tracesSampleRate: isProd
+		? Number.isFinite(tracesRateEnv)
+			? tracesRateEnv
+			: 0.15
+		: isPreview
+			? Number.isFinite(tracesRateEnv)
+				? tracesRateEnv
+				: 0.3
+			: 0, // dev off
+
+	// Replay only outside dev, and keep prod modest
+	replaysSessionSampleRate: isProd
+		? Number.isFinite(replaysSessionRateEnv)
+			? replaysSessionRateEnv
+			: 0.05
+		: isPreview
+			? Number.isFinite(replaysSessionRateEnv)
+				? replaysSessionRateEnv
+				: 0.2
+			: 0,
+
+	replaysOnErrorSampleRate:
+		isProd || isPreview
+			? Number.isFinite(replaysOnErrorRateEnv)
+				? replaysOnErrorRateEnv
+				: 1
+			: 0,
 
 	// Adds request headers and IP for users, for more info visit:
 	// https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#sendDefaultPii
 	sendDefaultPii: true,
 
-	// Add optional integrations for additional features
-	integrations: [Sentry.replayIntegration()],
+	// Helpful when you explicitly opt in during local troubleshooting
+	debug: Boolean(process.env.NEXT_PUBLIC_SENTRY_DEBUG) && !isProd,
 
-	// Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
-	tracesSampleRate: 1,
-	// Enable logs to be sent to Sentry
-	enableLogs: true,
+	// Extra guardrails
+	ignoreErrors: [
+		// add known noisy errors here if needed
+	],
+	denyUrls: isProd
+		? [/^chrome-extension:\/\//, /extensions\//, /^moz-extension:\/\//]
+		: [],
 
-	// Define how likely Replay events are sampled.
-	// This sets the sample rate to be 10%. You may want this to be 100% while
-	// in development and sample at a lower rate in production
-	replaysSessionSampleRate: 0.1,
+	beforeSend(event) {
+		// If someone flipped the kill-switch at runtime via env injection
+		if (!enabled) return null;
 
-	// Define how likely Replay events are sampled when an error occurs.
-	replaysOnErrorSampleRate: 1.0,
-
-	// Setting this option to true will print useful information to the console while you're setting up Sentry.
-	debug: false,
+		// Example scrubber
+		if (event.request?.headers) {
+			const { cookie, authorization, ...safeHeaders } = event.request.headers;
+			event.request.headers = safeHeaders;
+		}
+		return event;
+	},
 });
 
+// Next.js router transition helper
 export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
