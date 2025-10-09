@@ -14,6 +14,7 @@ class SentryExampleFrontendError extends Error {
 export default function Page() {
 	const [hasSentError, setHasSentError] = useState(false);
 	const [isConnected, setIsConnected] = useState(true);
+	const [shouldThrowRenderError, setShouldThrowRenderError] = useState(false);
 
 	useEffect(() => {
 		async function checkConnectivity() {
@@ -22,6 +23,13 @@ export default function Page() {
 		}
 		checkConnectivity();
 	}, []);
+
+	// This will throw a render error when shouldThrowRenderError is true
+	if (shouldThrowRenderError) {
+		throw new SentryExampleFrontendError(
+			"This is a React render error thrown during the render phase.",
+		);
+	}
 
 	return (
 		<div>
@@ -87,6 +95,16 @@ export default function Page() {
 					disabled={!isConnected}
 				>
 					<span>Throw Sample Error</span>
+				</button>
+
+				<button
+					type="button"
+					onClick={() => {
+						setShouldThrowRenderError(true);
+					}}
+					disabled={!isConnected}
+				>
+					<span>Throw React Render Error</span>
 				</button>
 
 				{hasSentError ? (

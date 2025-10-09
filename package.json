@@ -55,8 +55,6 @@
 			"@sentry/cli",
 			"@tailwindcss/oxide"
 		],
-		"ignoredBuiltDependencies": [
-			"sharp"
-		]
+		"ignoredBuiltDependencies": ["sharp"]
 	}
 }

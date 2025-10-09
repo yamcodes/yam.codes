@@ -1,5 +1,7 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
+import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Button } from "~/components/ui/button";
 
@@ -34,12 +36,18 @@ export default function ErrorPage({
 	error: Error & { digest?: string };
 	reset: () => void;
 }) {
+	useEffect(() => {
+		// Send error to Sentry for monitoring
+		Sentry.captureException(error);
+	}, [error]);
+
 	return (
 		<ErrorBoundary
 			FallbackComponent={ErrorFallback}
 			onReset={reset}
 			onError={(error) => {
-				// Log the error to your error reporting service
+				// Send error to Sentry for monitoring
+				Sentry.captureException(error);
 				console.error("Error caught by error boundary:", error);
 			}}
 		>
