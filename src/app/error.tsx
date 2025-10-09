@@ -4,13 +4,7 @@ import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
 import { Button } from "~/components/ui/button";
 
-function ErrorFallback({
-	error,
-	reset,
-}: {
-	error: Error;
-	reset: () => void;
-}) {
+function ErrorFallback({ error, reset }: { error: Error; reset: () => void }) {
 	return (
 		<div className="flex min-h-[400px] flex-col items-center justify-center gap-4 rounded-lg border border-destructive/50 bg-destructive/10 p-8 text-center">
 			<h2 className="text-2xl font-bold text-destructive">

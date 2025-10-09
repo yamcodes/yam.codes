@@ -1,3 +1,6 @@
+// biome-ignore-all lint/performance/noImgElement: We're using Node.js runtime with local assets
+// Read: https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image#using-nodejs-runtime-with-local-assets
+
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";

@@ -3,9 +3,9 @@
 import { GraphQLClient, gql } from "graphql-request";
 import {
 	GitHubAPIError,
+	handleGitHubError,
 	NotFoundError,
 	RateLimitError,
-	handleGitHubError,
 } from "~/lib/error-handling";
 
 interface GitHubRepo {

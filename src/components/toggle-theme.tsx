@@ -14,7 +14,9 @@ import {
 
 export function ToggleTheme({
 	forDropdown = false,
-}: { forDropdown?: boolean }) {
+}: {
+	forDropdown?: boolean;
+}) {
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 
