@@ -28,6 +28,14 @@
 				"useNumberNamespace": "error",
 				"noInferrableTypes": "error",
 				"noUselessElse": "error"
+			},
+			"correctness": {
+				"noUnusedVariables": {
+					"level": "warn",
+					"options": {
+						"ignoreRestSiblings": true
+					}
+				}
 			}
 		}
 	},

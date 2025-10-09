@@ -10,6 +10,7 @@ const ENV =
 	process.env.VERCEL_ENV ||
 	process.env.NODE_ENV; // fallback
 
+// biome-ignore lint/correctness/noUnusedVariables: Might be used in the future
 const isDev = ENV === "development";
 const isPreview = ENV === "preview";
 const isProd = ENV === "production";
