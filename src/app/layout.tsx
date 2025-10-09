@@ -9,6 +9,7 @@ import { ThemeProvider } from "~/components/theme-provider";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://yam.codes"),
 	title: "Yam Borodetsky · Software Engineer",
 	description:
 		"Yam Borodetsky is a software engineer specializing in full-stack development",
