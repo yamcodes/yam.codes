@@ -66,7 +66,7 @@ export default function Home() {
 					Outside of work, I stay just as curious. I contribute to open source,
 					experiment with new tech, and build tools that make life easier for
 					developers. I care deeply about developer experience, user-first
-					design, and writing code I won't have to rewrite—or at least code that
+					design, and writing code I won't have to rewrite - or at least code that
 					the Yam of six months from now won't curse me for.
 				</p>
 			</div>
